@@ -57,7 +57,7 @@ def logout():
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
-    if not current_user.is_anonymous and current_user.is_authenticate:
+    if not current_user.is_anonymous and current_user.is_authenticated:
         return redirect(url_for('main.index'))
 
     form = RegistrationForm()
