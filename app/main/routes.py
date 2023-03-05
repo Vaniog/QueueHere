@@ -139,3 +139,10 @@ def unfollow(username):
     db.session.commit()
     flash('You stopped following {}'.format(username))
     return redirect(url_for('main.user', username=username))
+
+
+@bp.after_request
+def add_header(response):
+    response.cache_control.private = True
+    response.cache_control.public = False
+    return response
