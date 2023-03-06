@@ -12,3 +12,10 @@ def not_found_error(error):
 def internal_error(error):
     db.session.rollback()
     return render_template('500.html'), 500
+
+
+@bp.after_request
+def add_header(response):
+    response.cache_control.private = True
+    response.cache_control.public = False
+    return response
