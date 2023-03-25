@@ -1,6 +1,6 @@
 from flask import Flask
 from app.config import Config
-from .extensions import db, login, migrate
+from .extensions import db, login, migrate, bootstrap
 import logging
 from logging.handlers import RotatingFileHandler
 import os
@@ -12,6 +12,7 @@ def create_app(config_obj=Config()):
     db.init_app(app)
     login.init_app(app)
     migrate.init_app(app, db)
+    bootstrap.init_app(app)
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
