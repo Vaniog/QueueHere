@@ -4,3 +4,4 @@ logs
 app.db
 venv
 cache
+gunicorn.log

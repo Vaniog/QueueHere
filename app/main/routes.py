@@ -1,32 +1,28 @@
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Post
 from app import db
-from app.main.forms import LoginForm, RegistrationForm, EditProfileForm
+from app.main.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app.main import bp
 
 
 @bp.route('/')
-@bp.route('/index')
+@bp.route('/index', methods=['POST', 'GET'])
 @login_required
 def index():
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        },
-        {
-            'author': {'username': 'Ипполит'},
-            'body': 'Какая гадость эта ваша заливная рыба!!'
-        }
-    ]
-    return render_template('index.html', title='Home', posts=posts)
+    form = PostForm()
+
+    if form.validate_on_submit():
+        post = Post(body=form.post.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash("You created the post!")
+        return redirect(url_for('main.index'))
+
+    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    return render_template('index.html', title='Home', form=form, posts=posts)
 
 
 @bp.route('/login', methods=['POST', 'GET'])
