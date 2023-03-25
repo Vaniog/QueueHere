@@ -8,7 +8,7 @@ from datetime import datetime
 from app.main import bp
 
 
-@bp.route('/')
+@bp.route('/', methods=['POST', 'GET'])
 @bp.route('/index', methods=['POST', 'GET'])
 @login_required
 def index():
