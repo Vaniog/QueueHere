@@ -1,17 +1,25 @@
 {% extends "base.html" %}
 {% block app_content %}
-    <table>
-        <tr valign="top">
-            <td><img src="{{ user.avatar(128) }}"></td>
-            <td><h1>User: {{ user.username }}</h1>
+    <div class="card">
+        <div class="row">
+            <div class="col-md-4">
+                <img class="card-img img-circle" src="{{ user.avatar(128) }}">
+            </div>
+            <div class="col-md-4">
+                <h1 class="card-title">User: {{ user.username }}</h1>
                 {% if user.about_me %}
-                    <p>{{ user.about_me }}
+                    <div class="card-body"><p class="card-body">{{ user.about_me }}</div>
                 {% endif %}
                 {% if user.last_seen %}
-                    <p>Last seen: {{ user.last_seen }}
+                    <p>
+                    <div class="card-body">Last seen: {{ user.last_seen }}</div>
                 {% endif %}
 
-                <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
+                <p>
+                <div class="badge">{{ user.followers.count() }}</div>
+                followers,
+                <div class="badge">{{ user.followed.count() }}</div>
+                following.</p>
                 {% if user == current_user %}
                     <p><a href="{{ url_for('main.edit_profile') }}">Edit your profile</a></p>
                 {% elif not current_user.is_following(user) %}
@@ -19,9 +27,9 @@
                 {% else %}
                     <p><a href="{{ url_for('main.unfollow', username=user.username) }}">Unfollow</a></p>
                 {% endif %}
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
     <hr>
     {% for post in posts %}
         {% include '_post.html' %}
