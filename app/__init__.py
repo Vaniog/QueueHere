@@ -1,6 +1,6 @@
 from flask import Flask
 from app.config import Config
-from .extensions import db, login, migrate, bootstrap
+from app.extensions import db, login, migrate, bootstrap, mail
 import logging
 from logging.handlers import RotatingFileHandler
 import os
@@ -11,8 +11,9 @@ def create_app(config_obj=Config()):
     app.config.from_object(config_obj)
     db.init_app(app)
     login.init_app(app)
-    migrate.init_app(app, db)
+    migrate.init_app(app, db, render_as_batch=True)
     bootstrap.init_app(app)
+    mail.init_app(app)
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
@@ -20,7 +21,13 @@ def create_app(config_obj=Config()):
     from app.errors import bp as err_bp
     app.register_blueprint(err_bp)
 
-    login.login_view = 'main.login'
+    from app.auth import bp as auth_bp
+    app.register_blueprint(auth_bp)
+
+    from app.queue import bp as queue_bp
+    app.register_blueprint(queue_bp)
+
+    login.login_view = 'auth.login'
 
     app.app_context().push()
 

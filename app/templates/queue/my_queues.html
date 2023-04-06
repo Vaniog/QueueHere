@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <h1 class="text-center mb-4 mt-4">Your queues</h1>
+            {% for user_queue in current_user.queues %}
+                <div class="row mt-3" id="your-queue-row" data-queue="{{ user_queue.queue_id }}">
+                    <div class="col-6 text-center">
+                        <a class="link-primary text-decoration-none h5 align-middle"
+                           href={{ url_for('queue.queue', queue_id=user_queue.queue_id) }}>
+                            {{ user_queue.queue.name }}
+                        </a>
+                    </div>
+
+                    <div class="col-6 text-center">
+                        <!-- Modal trigger -->
+                        <button type="button" class="btn btn-outline-secondary"
+                                data-bs-toggle="modal" data-bs-target="#modal-forget">
+                            Forget
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modal-forget" tabindex="-1" aria-labelledby="modal-forget"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modal-forget">Are you sure you want to forget
+                                            "{{ user_queue.queue.name }}"?</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        This action cannot be undone.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No
+                                        </button>
+
+                                        <button id="forget-queue-btn" data-queue="{{ user_queue.queue_id }}"
+                                                data-bs-dismiss="modal"
+                                                type="button" class="btn btn-danger">Yes
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <h1 class="text-center mb-4 mt-4">Owned queues</h1>
+            {% for queue in current_user.owned_queues %}
+                <div class="row mt-3" id="owned-queue-row" data-queue="{{ queue.id }}">
+                    <div class="col-6 text-center">
+                        <a class="link-primary text-decoration-none h5 align-middle"
+                           href={{ url_for('queue.queue', queue_id=queue.id) }}>
+                            {{ queue.name }}
+                        </a>
+                    </div>
+                    <div class="col-6 text-center">
+                        <!-- Modal trigger -->
+                        <button type="button" class="btn btn-outline-danger"
+                                data-bs-toggle="modal" data-bs-target="#modal-kill">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modal-kill" tabindex="-1" aria-labelledby="modal-kill"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modal-kill">Are you sure you want to delete
+                                            "{{ queue.name }}"?</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        This action cannot be undone.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No
+                                        </button>
+                                        <button id="kill-queue-btn" data-queue="{{ queue.id }}"
+                                                data-bs-dismiss="modal"
+                                                type="button" class="btn btn-danger">Yes
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_scripts %}
+    <script type="text/javascript">
+        forget_btns = document.querySelectorAll('#forget-queue-btn')
+        forget_btns.forEach((element) => {
+            let queue_id = element.getAttribute('data-queue')
+            element.addEventListener('click', () => {
+                fetch('{{ url_for('queue.forget_queue') }}', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        queue_id: queue_id
+                    })
+                })
+                    .then((response) => {
+                        if (response.ok)
+                            return response.json()
+                        throw new Error()
+                    })
+                    .then((result) => {
+                        document.querySelector(`#your-queue-row[data-queue=${queue_id}]`).remove()
+                    })
+                    .catch((error) => {
+                    })
+            })
+        })
+
+
+        kill_btns = document.querySelectorAll('#kill-queue-btn')
+        kill_btns.forEach((element) => {
+            let queue_id = element.getAttribute('data-queue')
+            element.addEventListener('click', () => {
+                fetch('{{ url_for('queue.kill_queue') }}', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        queue_id: queue_id
+                    })
+                })
+                    .then((response) => {
+                        if (response.ok)
+                            return response.json()
+                        throw new Error()
+                    })
+                    .then((result) => {
+                        document.querySelector(`#owned-queue-row[data-queue=${queue_id}]`).remove()
+                    })
+                    .catch((error) => {
+                    })
+            })
+        })
+    </script>
+
+{% endblock %}

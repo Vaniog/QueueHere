@@ -5,59 +5,83 @@
 <head>
     <title>
         {% if title %}
-            {{ title }} - Microblog
+            {{ title }} - QueueHere
         {% else %}
-            Welcome to Microblog
+            QueueHere
         {% endif %}
     </title>
-    {{ bootstrap.load_css() }}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
-<nav class="navbar navbar-default">
-    <a class="navbar-brand" href="{{ url_for('main.index') }}">Microblog</a>
+<nav class="navbar navbar-expand-sm text-bg-primary nav-pills">
+    <div class="container-fluid">
+        <a href="{{ url_for('main.index') }}" class="navbar-brand">QueueHere</a>
 
-    <button type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbar_nav"
-            aria-controls="navbar_nav"
-            class="navbar-toggler"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-        Menu
-    </button>
+        <button class="navbar-toggler"
+                data-bs-toggle="collapse"
+                data-bs-target="#nav"
+                aria-controls="nav"
+                aria-label="Expand">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbar_nav">
-        <ul class="navbar-nav">
-            <li><a href="{{ url_for('main.index') }}">Home</a></li>
-            <li><a href="{{ url_for('main.users') }}">Users</a></li>
-        </ul>
-        <ul class="navbar-nav navbar-right">
-            {% if current_user.is_anonymous %}
-                <li><a href="{{ url_for('main.login') }}">Login</a></li>
-            {% else %}
-                <li><a href="{{ url_for('main.user', username=current_user.username) }}">Profile</a></li>
-                <li><a href="{{ url_for('main.logout') }}">Logout</a></li>
-            {% endif %}
-        </ul>
+        <div class="collapse navbar-collapse align-items-center" id="nav">
+            <ul class="navbar-nav w-100">
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('queue.create_queue') }}" class="nav-link">New Queue</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ url_for('queue.my_queues') }}" class="nav-link">Queues</a>
+                    </li>
+
+                    <li class="nav-item ms-sm-auto">
+                        <a href="{{ url_for('auth.logout') }}" class="nav-link">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('auth.login') }}" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('auth.register') }}" class="nav-link">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 </nav>
 
 
 <div class="container">
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    {% for category, message in messages %}
+                        <div class="alert text-bg-{{ category }} border mt-2 alert-dismissible fade show"
+                             role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-4"></div>
+            </div>
         {% endif %}
     {% endwith %}
 
     {% block app_content %}{% endblock %}
 </div>
 
-{{ bootstrap.load_js() }}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    {% block app_scripts %}{% endblock %}
 </body>
 </html>

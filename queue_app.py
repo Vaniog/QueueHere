@@ -1,5 +1,6 @@
 from app import create_app, db
-from app.models import User, Post
+from app.queue.models import Queue, UserQueue
+from app.auth.models import User
 
 app = create_app()
 
@@ -7,4 +8,4 @@ app = create_app()
 @app.shell_context_processor
 def make_shell_context():
     create_app()
-    return {'db': db, 'User': User, 'Post': Post}
+    return {'db': db, 'User': User, 'Queue': Queue, 'UserQueue': UserQueue}

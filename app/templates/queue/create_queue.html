@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block app_content %}
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <h1 class="text-center mb-4 mt-4">Create queue</h1>
+            {{ render_form(create_queue_form) }}
+        </div>
+    </div>
+{% endblock %}

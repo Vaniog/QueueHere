@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block app_content %}
+    <div class="row">
+        <div class="col-md-4 col-lg-6">
+            <div class="mt-5 d-inline-flex align-items-end">
+                <div class="d-flex align-items-center">
+                    <h1 class="mb-0">{{ queue.name }}</h1>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary ms-5" id="copy-btn"
+                        data-bs-toggle="popover" data-bs-content="Link has been copied">
+                    Copy link <i class="bi bi-clipboard"></i>
+                </button>
+            </div>
+            <table class="table mt-4">
+                {% for user_queue in queue.list() %}
+                    <tr>
+                        <td{% if user_queue.member_id == watching_user.id %}
+                            class="table-active"
+                        {% endif %}>
+                            {{ user_queue.name_printed }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% if not queue.contains(watching_user) %}
+                <div class="mt-5">
+                    <form method="post" action="#" class="form">
+
+                        {{ join_queue_form.hidden_tag() }}
+                        {{ join_queue_form.name_to_print.label(class="form-label") }}
+                        {{ join_queue_form.name_to_print(class="form-control", value=watching_user.name_to_print) }}
+
+                        {{ join_queue_form.submit(class="btn btn-primary mt-2") }}
+                    </form>
+                </div>
+            {% else %}
+                <div class="mt-5">
+                    <a href="{{ url_for('queue.leave_queue', queue_id=queue.id) }}">
+                        <button class="btn btn-primary">
+                            Leave
+                        </button>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_scripts %}
+    <script type="text/javascript">
+        let copy_btn = document.getElementById('copy-btn')
+        let popover = new bootstrap.Popover(copy_btn)
+
+        copy_btn.addEventListener('click', () => {
+            navigator.clipboard.writeText(
+                '{{ url_for('queue.queue', queue_id=queue.id, _external=True) }}'
+            )
+            setTimeout(() => {
+                popover.hide()
+            }, 1000)
+        })
+    </script>
+{% endblock %}
