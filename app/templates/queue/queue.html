@@ -3,40 +3,43 @@
 
 {% block app_content %}
     <div class="row">
-        <div class="col-md-4 col-lg-6">
-            <div class="mt-5 d-inline-flex align-items-end">
-                <div class="d-flex align-items-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="mt-5 d-inline-flex align-items-end flex-wrap">
+                <div class="d-flex align-items-center me-5">
                     <h1 class="mb-0">{{ queue.name }}</h1>
                 </div>
-                <button class="btn btn-sm btn-outline-secondary ms-5" id="copy-btn"
-                        data-bs-toggle="popover" data-bs-content="Link has been copied">
-                    Copy link <i class="bi bi-clipboard"></i>
-                </button>
+                <div class="btn-group mt-3" role="group">
+                    <button class="btn btn-outline-secondary" id="copy-btn"
+                            data-bs-toggle="popover" data-bs-content="Link has been copied">
+                        Link <i class="bi bi-clipboard"></i>
+                    </button>
+                    {% if current_user == queue.admin %}
+                        <a class="btn btn-outline-success"
+                           href="{{ url_for('queue.manage_queue', queue_id = queue.id) }}">
+                            <i class="bi bi-wrench"></i>
+                        </a>
+                    {% endif %}
+
+                </div>
             </div>
-            <table class="table mt-4">
-                {% for user_queue in queue.list() %}
-                    <tr>
-                        <td{% if user_queue.member_id == watching_user.id %}
-                            class="table-active"
-                        {% endif %}>
-                            {{ user_queue.name_printed }}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
+
             {% if not queue.contains(watching_user) %}
-                <div class="mt-5">
-                    <form method="post" action="#" class="form">
+                <div class="mt-3 mb-5">
+                    <form method="post" action="#" class="row justify-content-start">
 
                         {{ join_queue_form.hidden_tag() }}
-                        {{ join_queue_form.name_to_print.label(class="form-label") }}
-                        {{ join_queue_form.name_to_print(class="form-control", value=watching_user.name_to_print) }}
-
-                        {{ join_queue_form.submit(class="btn btn-primary mt-2") }}
+                        <div class="col-md-7">
+                            {{ join_queue_form.name_to_print(class="form-control",
+                             value=watching_user.name_to_print,
+                             placeholder="Enter your name") }}
+                        </div>
+                        <div class="col-6 col-md-3 mt-md-0 mt-2">
+                            {{ join_queue_form.submit(class="btn w-100 btn-primary", type="submit") }}
+                        </div>
                     </form>
                 </div>
             {% else %}
-                <div class="mt-5">
+                <div class="mt-3">
                     <a href="{{ url_for('queue.leave_queue', queue_id=queue.id) }}">
                         <button class="btn btn-primary">
                             Leave
@@ -44,6 +47,22 @@
                     </a>
                 </div>
             {% endif %}
+
+            <table class="table mb-0 table-bordered mt-3 rounded-2">
+                {% for user_queue in queue.list() %}
+                    <tr>
+                        <td{% if user_queue.member_id == watching_user.id %}
+                            class="table-active"
+                        {% endif %}>
+                            {{ user_queue.name_printed }}
+                        </td>
+                        <td class="fit">
+                            {{ moment(user_queue.arrive_time).format('L HH:mm:ss') }}
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </table>
         </div>
     </div>
 {% endblock %}

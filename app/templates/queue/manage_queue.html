@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block app_link %}
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.13.0/Sortable.min.js"></script>
+{% endblock %}
+
+{% block app_content %}
+    <div class="row">
+        <div class="col-md-8 col-lg-7">
+            <div class="mt-5 d-inline-flex align-items-end flex-wrap">
+                <a class="btn btn-outline-success me-3"
+                   href="{{ url_for('queue.queue', queue_id=queue.id) }}">
+                    <i class="bi bi-arrow-left"></i>
+                </a>
+                <div class="d-flex align-items-center me-5">
+                    <h1 class="mb-0">{{ queue.name }}</h1>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-success" id="update-btn"
+                            data-bs-toggle="popover" data-bs-content="Updated">
+                        Save <i class="bi bi-cloud-arrow-up"></i>
+                    </button>
+                    <button class="btn btn-outline-danger" id="clear-btn"
+                            data-bs-toggle="popover" data-bs-content="Cleared">
+                        Clear <i class="bi bi-eraser"></i>
+                    </button>
+
+                    {% if current_user.is_admin %}
+                        <a href="{{ url_for('queue.spam_queue', queue_id = queue.id) }}"
+                           class="btn btn-outline-secondary">
+                            Spam <i class="bi bi-lightning"></i>
+                        </a>
+                    {% endif %}
+                </div>
+
+            </div>
+            <div class="border mt-4 rounded-1">
+                <table class="table mb-0 table-bordered">
+                    <tbody id="queue-table">
+                    {% for user_queue in queue.list() %}
+                        <tr id="queue-item-{{ user_queue.member_id }}" class="queue-item"
+                            data-user="{{ user_queue.member_id }}">
+                            <td class="drag-handle fit" role="button">
+                                <i class="bi bi-arrows-move"></i>
+                            </td>
+                            <td class="">
+                                {{ user_queue.name_printed }}
+                            </td>
+                            <td class="fit">
+                                {{ moment(user_queue.arrive_time).format('L HH:mm:ss') }}
+                            </td>
+                            <td role="button" class="fit" id="delete-btn">
+                                <i class="bi bi-x-circle text-danger"></i>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_scripts %}
+    <script>
+        Sortable.create(document.querySelector('#queue-table'), {
+            animation: 150,
+            handle: '.drag-handle'
+        });
+
+        document.querySelectorAll("#delete-btn").forEach((elem) => {
+            elem.addEventListener('click', () => {
+                elem.parentElement.style.transition = 'opacity 0.3s ease-in-out';
+                elem.parentElement.style.opacity = 0;
+                setTimeout(() => {
+                    elem.parentElement.remove();
+                }, 300);
+            })
+        })
+
+        update_btn = document.querySelector('#update-btn')
+
+        queue_id = '{{ queue.id }}';
+        update_btn.addEventListener('click', () => {
+            const queueItems = document.getElementById('queue-table').querySelectorAll('.queue-item');
+            const new_order = [];
+
+            queueItems.forEach(item => {
+                const id = item.getAttribute('data-user');
+                new_order.push(id);
+            });
+
+            const popoverInstance = new bootstrap.Popover(update_btn);
+
+            function LaunchPopover(text) {
+                update_btn.setAttribute('data-bs-content', text)
+                popoverInstance.show();
+                setTimeout(() => {
+                    popoverInstance.hide()
+                }, 1000)
+            }
+
+            fetch('{{ url_for('queue.new_order') }}', {
+                method: 'POST',
+                body: JSON.stringify({
+                    queue_id: queue_id,
+                    new_order: new_order
+                })
+            })
+                .then((response) => {
+                    if (response.ok)
+                        return response.json()
+                    throw new Error()
+                })
+                .then((result) => {
+                    LaunchPopover('Updated')
+                })
+                .catch((error) => {
+                    console.log(error)
+                    LaunchPopover('Error')
+                })
+        })
+
+        clear_btn = document.querySelector('#clear-btn')
+        clear_btn.addEventListener('click', () => {
+            const queueItems = document.getElementById('queue-table').querySelectorAll('.queue-item');
+            queueItems.forEach((elem) => {
+                elem.style.transition = 'opacity 0.3s ease-in-out';
+                elem.style.opacity = 0;
+                setTimeout(() => {
+                    elem.remove();
+                }, 300);
+            })
+        })
+    </script>
+
+{% endblock %}

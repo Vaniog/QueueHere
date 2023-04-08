@@ -7,6 +7,8 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 class Config:
     MAX_OWNED_QUEUES_PER_USER = 50
+    LANGUAGES = ['en', 'ru']
+    BABEL_TRANSLATION_DIRECTORIES = os.path.join(basedir, "app/translations")
 
     SEND_FILE_MAX_AGE_DEFAULT = 0
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'some-key'

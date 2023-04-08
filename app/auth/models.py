@@ -21,6 +21,8 @@ class User(UserMixin, db.Model):
     is_confirmed = db.Column(db.Boolean, default=False, nullable=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
 
+    is_admin = db.Column(db.Boolean, default=False, nullable=False)
+
     def __repr__(self):
         return '<User {}>'.format(self.username)
 

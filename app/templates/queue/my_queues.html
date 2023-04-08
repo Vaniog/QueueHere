@@ -8,6 +8,7 @@
                 <div class="row mt-3" id="your-queue-row" data-queue="{{ user_queue.queue_id }}">
                     <div class="col-6 text-center">
                         <a class="link-primary text-decoration-none h5 align-middle"
+                        <a class="link-primary text-decoration-none h5 align-middle"
                            href={{ url_for('queue.queue', queue_id=user_queue.queue_id) }}>
                             {{ user_queue.queue.name }}
                         </a>
@@ -16,17 +17,19 @@
                     <div class="col-6 text-center">
                         <!-- Modal trigger -->
                         <button type="button" class="btn btn-outline-secondary"
-                                data-bs-toggle="modal" data-bs-target="#modal-forget">
+                                data-bs-toggle="modal" data-bs-target="#modal-forget-{{ user_queue.queue_id }}">
                             Forget
                         </button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="modal-forget" tabindex="-1" aria-labelledby="modal-forget"
+                        <div class="modal fade" id="modal-forget-{{ user_queue.queue_id }}" tabindex="-1"
+                             aria-labelledby="modal-forget-{{ user_queue.queue_id }}"
                              aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modal-forget">Are you sure you want to forget
+                                        <h5 class="modal-title" id="modal-forget-{{ user_queue.queue_id }}">Are you sure
+                                            you want to forget
                                             "{{ user_queue.queue.name }}"?</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
@@ -62,17 +65,19 @@
                     <div class="col-6 text-center">
                         <!-- Modal trigger -->
                         <button type="button" class="btn btn-outline-danger"
-                                data-bs-toggle="modal" data-bs-target="#modal-kill">
+                                data-bs-toggle="modal" data-bs-target="#modal-kill-{{ queue.id }}">
                             <i class="bi bi-trash-fill"></i>
                         </button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="modal-kill" tabindex="-1" aria-labelledby="modal-kill"
+                        <div class="modal fade" id="modal-kill-{{ queue.id }}" tabindex="-1"
+                             aria-labelledby="modal-kill-{{ queue.id }}"
                              aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modal-kill">Are you sure you want to delete
+                                        <h5 class="modal-title" id="modal-kill-{{ queue.id }}">Are you sure you want to
+                                            delete
                                             "{{ queue.name }}"?</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
@@ -117,9 +122,10 @@
                         throw new Error()
                     })
                     .then((result) => {
-                        document.querySelector(`#your-queue-row[data-queue=${queue_id}]`).remove()
+                        document.querySelector(`#your-queue-row[data-queue='${queue_id}']`).remove()
                     })
                     .catch((error) => {
+                        console.log(error)
                     })
             })
         })
@@ -141,12 +147,18 @@
                         throw new Error()
                     })
                     .then((result) => {
-                        document.querySelector(`#owned-queue-row[data-queue=${queue_id}]`).remove()
+                        document.querySelector(`#owned-queue-row[data-queue='${queue_id}']`).remove()
+                        try {
+                            document.querySelector(`#your-queue-row[data-queue='${queue_id}']`).remove()
+                        } catch (e) {
+                        }
                     })
                     .catch((error) => {
                     })
             })
         })
+
+
     </script>
 
 {% endblock %}

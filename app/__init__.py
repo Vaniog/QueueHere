@@ -1,6 +1,8 @@
-from flask import Flask
+from flask import Flask, request, current_app
+from flask_babel import gettext as _, lazy_gettext as _l
 from app.config import Config
-from app.extensions import db, login, migrate, bootstrap, mail
+from app.extensions import db, login, migrate, bootstrap, mail, moment, babel
+from app.utils import get_locale
 import logging
 from logging.handlers import RotatingFileHandler
 import os
@@ -14,6 +16,10 @@ def create_app(config_obj=Config()):
     migrate.init_app(app, db, render_as_batch=True)
     bootstrap.init_app(app)
     mail.init_app(app)
+    moment.init_app(app)
+
+    babel.init_app(app, locale_selector=get_locale, default_locale='ru')
+    print(_l("Hello!"))
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)

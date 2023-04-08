@@ -1,13 +1,14 @@
-from flask import render_template, flash, redirect, url_for, request, current_app
+from flask import render_template, flash, redirect, url_for, request, current_app, abort, session
 from flask_login import login_required, current_user
-from app.queue.models import Queue
+from app.queue.models import Queue, UserQueue
+from app.auth.models import User
 from app.auth.utils import cur_user_or_temp
-from app.auth.decorators import check_is_confirmed
-from app.extensions import db
+from app.auth.decorators import check_is_confirmed, check_is_admin
+from app.extensions import db, babel
 from app.queue.forms import CreateQueueForm, JoinQueueForm, KillQueueForm, ForgetQueueForm
 from app.queue import bp
 from werkzeug.urls import url_parse
-
+from flask_babel import _
 
 @bp.route('/queue/<queue_id>', methods=['GET', 'POST'])
 def queue(queue_id):
@@ -103,3 +104,57 @@ def my_queues():
     return render_template('queue/my_queues.html',
                            kill_queue_form=kill_form,
                            forget_queue_form=forget_form)
+
+
+@bp.route('/manage_queue/<queue_id>', methods=['GET'])
+@login_required
+@check_is_confirmed
+def manage_queue(queue_id):
+    cur_queue = Queue.query.filter_by(id=queue_id).first_or_404()
+    if cur_queue.admin != current_user:
+        abort(404)
+
+    return render_template('queue/manage_queue.html', queue=cur_queue)
+
+
+@bp.route('/spam_queue/<queue_id>', methods=['GET'])
+@login_required
+@check_is_admin
+def spam_queue(queue_id):
+    cur_queue = Queue.query.filter_by(id=queue_id).first_or_404()
+    for i in range(2, 7):
+        cur_queue.add_member(User.query.filter_by(id=i).first(), str(i))
+    db.session.commit()
+    return redirect(url_for('queue.manage_queue', queue_id=queue_id))
+
+
+@bp.route('/update_queue/new_order', methods=['POST'])
+@login_required
+@check_is_confirmed
+def new_order():
+    data = request.get_json(force=True)
+    queue_id = data['queue_id']
+
+    cur_queue = Queue.query.filter_by(id=queue_id).first_or_404()
+
+    if cur_queue.admin != current_user:
+        abort(400)
+
+    order = data['new_order']
+
+    users_queue = cur_queue.list()
+    old_indices = []
+    for user_queue in users_queue:
+        old_indices.append(user_queue.index_in_queue)
+        user_queue.is_visible = False
+    new_users_queue = []
+
+    for i in order:
+        new_users_queue.append(UserQueue.query.filter_by(queue_id=queue_id, member_id=int(i)).first_or_404())
+
+    for i in range(len(new_users_queue)):
+        new_users_queue[i].index_in_queue = old_indices[i]
+        new_users_queue[i].is_visible = True
+
+    db.session.commit()
+    return {}, 200

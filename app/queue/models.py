@@ -1,6 +1,7 @@
 from app import db
 
 import shortuuid
+from datetime import datetime
 
 
 class UserQueue(db.Model):
@@ -9,10 +10,14 @@ class UserQueue(db.Model):
     name_printed = db.Column(db.String(30), nullable=False)
 
     index_in_queue = db.Column(db.Integer, primary_key=True)
+    arrive_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
     is_visible = db.Column(db.Boolean, default=True, nullable=False)
 
     member = db.relationship("User", back_populates="queues", passive_deletes=True)
     queue = db.relationship("Queue", back_populates="members", passive_deletes=True)
+
+    def update_arrive_time(self):
+        self.arrive_time = datetime.utcnow()
 
 
 def generate_queue_id():
@@ -49,16 +54,23 @@ class Queue(db.Model):
         return self.was_in_queue(user) and self.get_user_queue(user).is_visible
 
     def add_member(self, user, name_printed):
+        if self.contains(user):
+            return
         self.last_index += 1
         if self.was_in_queue(user):
             was_user = self.get_user_queue(user)
             was_user.name_printed = name_printed
             was_user.index_in_queue = self.last_index
             was_user.is_visible = True
+            was_user.update_arrive_time()
             return
         uq = UserQueue(name_printed=name_printed, index_in_queue=self.last_index)
         uq.member = user
         self.members.append(uq)
+
+    def clear(self):
+        for member in self.members:
+            self.leave_member(member.member)
 
     def leave_member(self, user):
         UserQueue.query.filter_by(member_id=user.id, queue_id=self.id).first().is_visible = False
