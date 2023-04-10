@@ -39,22 +39,22 @@
             <ul class="navbar-nav w-100">
                 {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a href="{{ url_for('queue.create_queue') }}" class="nav-link">{{ _('New Queue') }}</a>
+                        <a href="{{ url_for('queue.create_queue') }}" class="nav-link">New Queue</a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ url_for('queue.my_queues') }}" class="nav-link">{{ _('Queues') }}</a>
+                        <a href="{{ url_for('queue.my_queues') }}" class="nav-link">Queues</a>
                     </li>
 
                     <li class="nav-item ms-sm-auto">
-                        <a href="{{ url_for('auth.logout') }}" class="nav-link">{{ _('Logout') }}</a>
+                        <a href="{{ url_for('auth.logout') }}" class="nav-link">Logout</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a href="{{ url_for('auth.login') }}" class="nav-link">{{ _('Login') }}</a>
+                        <a href="{{ url_for('auth.login') }}" class="nav-link">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url_for('auth.register') }}" class="nav-link">{{ _('Register') }}</a>
+                        <a href="{{ url_for('auth.register') }}" class="nav-link">Register</a>
                     </li>
                 {% endif %}
             </ul>

@@ -4,11 +4,10 @@ from app.queue.models import Queue, UserQueue
 from app.auth.models import User
 from app.auth.utils import cur_user_or_temp
 from app.auth.decorators import check_is_confirmed, check_is_admin
-from app.extensions import db, babel
+from app.extensions import db
 from app.queue.forms import CreateQueueForm, JoinQueueForm, KillQueueForm, ForgetQueueForm
 from app.queue import bp
 from werkzeug.urls import url_parse
-from flask_babel import _
 
 @bp.route('/queue/<queue_id>', methods=['GET', 'POST'])
 def queue(queue_id):

@@ -1,7 +1,6 @@
 from flask import render_template, redirect, url_for, g
 from flask_login import current_user
 from app.extensions import db
-from app.utils import get_locale
 from app.queue.forms import FindQueueForm
 from app.main import bp
 
@@ -19,7 +18,6 @@ def index():
 def before_request():
     if current_user is not None and current_user.is_authenticated:
         db.session.commit()
-    g.locale = str(get_locale())
 
 
 @bp.after_app_request
