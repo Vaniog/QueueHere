@@ -8,6 +8,9 @@ load_dotenv(os.path.join(basedir, '.env'))
 class Config:
     MAX_OWNED_QUEUES_PER_USER = 50
 
+    BABEL_DEFAULT_LOCAL = 'en'
+    BABEL_TRANSLATION_DIRECTORIES = os.path.join(basedir, "translations")
+
     SEND_FILE_MAX_AGE_DEFAULT = 0
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'some-key'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \

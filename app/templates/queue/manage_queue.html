@@ -19,17 +19,17 @@
                 <div class="btn-group">
                     <button class="btn btn-success" id="update-btn"
                             data-bs-toggle="popover" data-bs-content="Updated">
-                        Save <i class="bi bi-cloud-arrow-up"></i>
+                        {{ _('Save') }} <i class="bi bi-cloud-arrow-up"></i>
                     </button>
                     <button class="btn btn-outline-danger" id="clear-btn"
                             data-bs-toggle="popover" data-bs-content="Cleared">
-                        Clear <i class="bi bi-eraser"></i>
+                        {{ _('Clear') }} <i class="bi bi-eraser"></i>
                     </button>
 
                     {% if current_user.is_admin %}
                         <a href="{{ url_for('queue.spam_queue', queue_id = queue.id) }}"
                            class="btn btn-outline-secondary">
-                            Spam <i class="bi bi-lightning"></i>
+                            {{ _('Spam') }} <i class="bi bi-lightning"></i>
                         </a>
                     {% endif %}
                 </div>
@@ -115,11 +115,11 @@
                     throw new Error()
                 })
                 .then((result) => {
-                    LaunchPopover('Updated')
+                    LaunchPopover('{{ _('Updated') }}')
                 })
                 .catch((error) => {
                     console.log(error)
-                    LaunchPopover('Error')
+                    LaunchPopover('{{ _('Error') }}')
                 })
         })
 

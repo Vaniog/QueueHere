@@ -9,12 +9,13 @@ from app.queue.forms import CreateQueueForm, JoinQueueForm, KillQueueForm, Forge
 from app.queue import bp
 from werkzeug.urls import url_parse
 
+
 @bp.route('/queue/<queue_id>', methods=['GET', 'POST'])
 def queue(queue_id):
     cur_queue = Queue.query.filter_by(id=queue_id).first_or_404()
     join_form = JoinQueueForm()
 
-    cur_user = cur_user_or_temp(request)
+    cur_user = cur_user_or_temp()
 
     if join_form.validate_on_submit():
         if cur_queue.contains(cur_user):
@@ -57,7 +58,7 @@ def create_queue():
 def leave_queue(queue_id):
     cur_queue = Queue.query.filter_by(id=queue_id).first_or_404()
 
-    cur_queue.leave_member(cur_user_or_temp(request))
+    cur_queue.leave_member(cur_user_or_temp())
 
     db.session.commit()
     return redirect(url_for('queue.queue', queue_id=queue_id))
@@ -68,7 +69,7 @@ def forget_queue():
     data = request.get_json(force=True)
     try:
         cur_queue = Queue.query.filter_by(id=data['queue_id']).first()
-        cur_queue.remove_member(cur_user_or_temp(request))
+        cur_queue.remove_member(cur_user_or_temp())
         db.session.commit()
     except:
         return {}, 400

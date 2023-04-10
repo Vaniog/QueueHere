@@ -6,3 +6,4 @@ venv
 cache
 gunicorn.log
 .env
+scripts/

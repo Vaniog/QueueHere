@@ -1,12 +1,12 @@
 from app.auth.models import User
 from itsdangerous import URLSafeTimedSerializer
-from flask import current_app
+from flask import current_app, request
 from app.extensions import mail
 from flask_mail import Message
 from flask_login import current_user
 
 
-def cur_user_or_temp(request):
+def cur_user_or_temp():
     if current_user.is_authenticated:
         return current_user
     temp_user = User()

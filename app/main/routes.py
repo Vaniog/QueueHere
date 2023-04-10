@@ -1,8 +1,9 @@
 from flask import render_template, redirect, url_for, g
 from flask_login import current_user
-from app.extensions import db
+from app.extensions import db, babel
 from app.queue.forms import FindQueueForm
 from app.main import bp
+from flask_babel import gettext, get_translations, refresh
 
 
 @bp.route('/', methods=['POST', 'GET'])
