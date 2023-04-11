@@ -77,8 +77,8 @@ def resend_confirmation():
         return redirect(url_for("main.index"))
 
     token = generate_token(current_user.email)
-    confirm_url = url_for("auth.confirm_email", token=token, _external=True)
-    html = render_template("auth/confirm_email.html", confirm_url=confirm_url)
+    confirm_url = url_for("auth.email_verification", token=token, _external=True)
+    html = render_template("auth/email_verification.html", confirm_url=confirm_url)
     subject = "Please confirm your email"
     send_email(current_user.email, subject, html)
 

@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-11 00:17+0300\n"
-"PO-Revision-Date: 2023-04-10 23:26+0300\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2023-04-11 03:05+0300\n"
+"PO-Revision-Date: 2023-04-11 00:33+0300\n"
+"Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -18,6 +18,76 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
+
+#: app/auth/forms.py:9 app/auth/forms.py:16
+msgid "Username"
+msgstr "Логин"
+
+#: app/auth/forms.py:10 app/auth/forms.py:18
+msgid "Password"
+msgstr "Пароль"
+
+#: app/auth/forms.py:11
+msgid "Remember Me"
+msgstr "Запомнить меня"
+
+#: app/auth/forms.py:12 app/templates/auth/login.html:7
+msgid "Sign In"
+msgstr "Вход"
+
+#: app/auth/forms.py:17
+msgid "Email"
+msgstr "Email"
+
+#: app/auth/forms.py:20
+msgid "Repeat Password"
+msgstr "Повторите пароль"
+
+#: app/auth/forms.py:21 app/templates/auth/register.html:7
+#: app/templates/base.html:57
+msgid "Register"
+msgstr "Регистрация"
+
+#: app/auth/forms.py:26
+#, fuzzy
+msgid "This address is already in use."
+msgstr "Этот адрес уже используется"
+
+#: app/auth/forms.py:31
+msgid "This username is already in use."
+msgstr "Этот логин уже используется"
+
+#: app/queue/forms.py:8
+msgid "Name"
+msgstr "Название"
+
+#: app/queue/forms.py:9
+msgid "Create"
+msgstr "Создать"
+
+#: app/queue/forms.py:13
+msgid "Join with name"
+msgstr "Войти под именем"
+
+#: app/queue/forms.py:14
+msgid "Join"
+msgstr "Войти"
+
+#: app/queue/forms.py:18 app/queue/forms.py:23 app/queue/forms.py:28
+msgid "Queue ID"
+msgstr "ID Очереди"
+
+#: app/queue/forms.py:19
+msgid "Find"
+msgstr "Найти"
+
+#: app/queue/forms.py:24
+msgid "Delete"
+msgstr "Удалить"
+
+#: app/queue/forms.py:29 app/templates/queue/my_queues.html:21
+msgid "Forget"
+msgstr "Забыть"
 
 #: app/templates/base.html:42
 msgid "New Queue"
@@ -35,9 +105,64 @@ msgstr "Выйти"
 msgid "Login"
 msgstr "Войти"
 
-#: app/templates/base.html:57
-msgid "Register"
-msgstr "Регистрация"
+#: app/templates/auth/email_verification.html:2
+msgid ""
+"Welcome! Thanks for signing up. Please follow this link to activate your "
+"account:"
+msgstr ""
+"Добро пожаловать! Спасибо за регистрацию. Перейдите по данной ссылки для "
+"активации аккаунта"
+
+#: app/templates/auth/inactive.html:8
+msgid ""
+"You have not confirmed your account. Please check your inbox (and your "
+"spam folder) - you should have received an email with a confirmation "
+"link."
+msgstr ""
+"Вы не подтвердили свою учетную запись. Пожалуйста, проверьте свой "
+"почтовый ящик (и папку спам) - вы должны были получить письмо со ссылкой "
+"для подтверждения."
+
+#: app/templates/auth/inactive.html:12
+msgid "Didn't get the email?"
+msgstr "Не получили письмо?"
+
+#: app/templates/auth/inactive.html:14
+msgid "Resend"
+msgstr "Отправить еще раз"
+
+#: app/templates/auth/login.html:10
+msgid "New User?"
+msgstr "Новый пользователь?"
+
+#: app/templates/auth/login.html:11
+msgid "Click to Register!"
+msgstr "Нажмите для регистрации!"
+
+#: app/templates/errors/404.html:4
+msgid "Wrong address"
+msgstr "Неверный адрес"
+
+#: app/templates/errors/404.html:5 app/templates/errors/500.html:6
+msgid "Back"
+msgstr "Вернуться"
+
+#: app/templates/errors/500.html:4
+msgid "An unexpected error has occurred"
+msgstr "Возникла непредвиденная ошибка"
+
+#: app/templates/errors/500.html:5
+msgid "The administrator has been notified. Sorry for the inconvenience!"
+msgstr "Администратор был уведомлен, извините за проблемы!"
+
+#: app/templates/main/index.html:7
+msgid "Join Queue"
+msgstr "Присоединиться"
+
+#: app/templates/queue/manage_queue.html:21
+#: app/templates/queue/manage_queue.html:118
+msgid "Updated"
+msgstr "Сохранено"
 
 #: app/templates/queue/manage_queue.html:22
 msgid "Save"
@@ -51,14 +176,51 @@ msgstr "Очистить"
 msgid "Spam"
 msgstr "Спам"
 
-#: app/templates/queue/manage_queue.html:118
-msgid "Updated"
-msgstr "Сохранено"
-
 #: app/templates/queue/manage_queue.html:122
 msgid "Error"
 msgstr "Ошибка"
 
-#~ msgid "Hello!"
-#~ msgstr "Привет!"
+#: app/templates/queue/my_queues.html:6
+msgid "Your queues"
+msgstr "Ваши очереди"
+
+#: app/templates/queue/my_queues.html:32
+msgid "Are you sure you want to forget?"
+msgstr "Вы уверены что хотите забыть?"
+
+#: app/templates/queue/my_queues.html:38
+msgid "This action cannot be undone"
+msgstr "Это действие не может быть отменено"
+
+#: app/templates/queue/my_queues.html:42 app/templates/queue/my_queues.html:92
+msgid "No"
+msgstr "Нет"
+
+#: app/templates/queue/my_queues.html:48 app/templates/queue/my_queues.html:97
+msgid "Yes"
+msgstr "Да"
+
+#: app/templates/queue/my_queues.html:58
+msgid "Owned queues"
+msgstr "Созданные очереди"
+
+#: app/templates/queue/my_queues.html:82
+msgid "Are you sure you want to delete?"
+msgstr "Вы уверены что хотите удалить?"
+
+#: app/templates/queue/my_queues.html:88
+msgid "This action cannot be undone."
+msgstr "Это действие не может быть отменено"
+
+#: app/templates/queue/queue.html:20
+msgid "Link has been copied"
+msgstr "Ссылка была скопирована"
+
+#: app/templates/queue/queue.html:21
+msgid "Link"
+msgstr "Ссылка"
+
+#: app/templates/queue/queue.html:49
+msgid "Leave"
+msgstr "Выйти"
 

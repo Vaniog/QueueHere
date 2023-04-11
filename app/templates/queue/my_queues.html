@@ -3,7 +3,7 @@
 {% block app_content %}
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-4">
-            <h1 class="text-center mb-4 mt-4">Your queues</h1>
+            <h1 class="text-center mb-4 mt-4">{{ _('Your queues') }}</h1>
             {% for user_queue in current_user.queues %}
                 <div class="row mt-3" id="your-queue-row" data-queue="{{ user_queue.queue_id }}">
                     <div class="col-6 text-center">
@@ -18,7 +18,7 @@
                         <!-- Modal trigger -->
                         <button type="button" class="btn btn-outline-secondary"
                                 data-bs-toggle="modal" data-bs-target="#modal-forget-{{ user_queue.queue_id }}">
-                            Forget
+                            {{ _('Forget') }}
                         </button>
 
                         <!-- Modal -->
@@ -28,22 +28,24 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modal-forget-{{ user_queue.queue_id }}">Are you sure
-                                            you want to forget
+                                        <h5 class="modal-title" id="modal-forget-{{ user_queue.queue_id }}">
+                                            {{ _('Are you sure you want to forget?') }}
                                             "{{ user_queue.queue.name }}"?</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        This action cannot be undone.
+                                        {{ _('This action cannot be undone') }}
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            {{ _('No') }}
                                         </button>
 
                                         <button id="forget-queue-btn" data-queue="{{ user_queue.queue_id }}"
                                                 data-bs-dismiss="modal"
-                                                type="button" class="btn btn-danger">Yes
+                                                type="button" class="btn btn-danger">
+                                            {{ _('Yes') }}
                                         </button>
                                     </div>
                                 </div>
@@ -53,7 +55,7 @@
                 </div>
             {% endfor %}
 
-            <h1 class="text-center mb-4 mt-4">Owned queues</h1>
+            <h1 class="text-center mb-4 mt-4">{{ _('Owned queues') }}</h1>
             {% for queue in current_user.owned_queues %}
                 <div class="row mt-3" id="owned-queue-row" data-queue="{{ queue.id }}">
                     <div class="col-6 text-center">
@@ -76,21 +78,23 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modal-kill-{{ queue.id }}">Are you sure you want to
-                                            delete
+                                        <h5 class="modal-title" id="modal-kill-{{ queue.id }}">
+                                            {{ _('Are you sure you want to delete?') }}
                                             "{{ queue.name }}"?</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        This action cannot be undone.
+                                        {{ _('This action cannot be undone.') }}
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            {{ _('No') }}
                                         </button>
                                         <button id="kill-queue-btn" data-queue="{{ queue.id }}"
                                                 data-bs-dismiss="modal"
-                                                type="button" class="btn btn-danger">Yes
+                                                type="button" class="btn btn-danger">
+                                            {{ _('Yes') }}
                                         </button>
                                     </div>
                                 </div>

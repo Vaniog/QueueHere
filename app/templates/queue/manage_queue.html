@@ -9,16 +9,16 @@
     <div class="row">
         <div class="col-md-8 col-lg-7">
             <div class="mt-5 d-inline-flex align-items-end flex-wrap">
-                <a class="btn btn-outline-success me-3"
+                <a class="btn btn-outline-success me-4"
                    href="{{ url_for('queue.queue', queue_id=queue.id) }}">
                     <i class="bi bi-arrow-left"></i>
                 </a>
-                <div class="d-flex align-items-center me-5">
+                <div class="d-flex align-items-center me-4">
                     <h1 class="mb-0">{{ queue.name }}</h1>
                 </div>
                 <div class="btn-group">
                     <button class="btn btn-success" id="update-btn"
-                            data-bs-toggle="popover" data-bs-content="Updated">
+                            data-bs-toggle="popover" data-bs-content="{{ _('Updated') }}">
                         {{ _('Save') }} <i class="bi bi-cloud-arrow-up"></i>
                     </button>
                     <button class="btn btn-outline-danger" id="clear-btn"

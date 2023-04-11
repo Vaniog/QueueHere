@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-11 00:17+0300\n"
+"POT-Creation-Date: 2023-04-11 03:05+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,75 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
+
+#: app/auth/forms.py:9 app/auth/forms.py:16
+msgid "Username"
+msgstr ""
+
+#: app/auth/forms.py:10 app/auth/forms.py:18
+msgid "Password"
+msgstr ""
+
+#: app/auth/forms.py:11
+msgid "Remember Me"
+msgstr ""
+
+#: app/auth/forms.py:12 app/templates/auth/login.html:7
+msgid "Sign In"
+msgstr ""
+
+#: app/auth/forms.py:17
+msgid "Email"
+msgstr ""
+
+#: app/auth/forms.py:20
+msgid "Repeat Password"
+msgstr ""
+
+#: app/auth/forms.py:21 app/templates/auth/register.html:7
+#: app/templates/base.html:57
+msgid "Register"
+msgstr ""
+
+#: app/auth/forms.py:26
+msgid "This address is already in use."
+msgstr ""
+
+#: app/auth/forms.py:31
+msgid "This username is already in use."
+msgstr ""
+
+#: app/queue/forms.py:8
+msgid "Name"
+msgstr ""
+
+#: app/queue/forms.py:9
+msgid "Create"
+msgstr ""
+
+#: app/queue/forms.py:13
+msgid "Join with name"
+msgstr ""
+
+#: app/queue/forms.py:14
+msgid "Join"
+msgstr ""
+
+#: app/queue/forms.py:18 app/queue/forms.py:23 app/queue/forms.py:28
+msgid "Queue ID"
+msgstr ""
+
+#: app/queue/forms.py:19
+msgid "Find"
+msgstr ""
+
+#: app/queue/forms.py:24
+msgid "Delete"
+msgstr ""
+
+#: app/queue/forms.py:29 app/templates/queue/my_queues.html:21
+msgid "Forget"
+msgstr ""
 
 #: app/templates/base.html:42
 msgid "New Queue"
@@ -33,8 +102,58 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: app/templates/base.html:57
-msgid "Register"
+#: app/templates/auth/email_verification.html:2
+msgid ""
+"Welcome! Thanks for signing up. Please follow this link to activate your "
+"account:"
+msgstr ""
+
+#: app/templates/auth/inactive.html:8
+msgid ""
+"You have not confirmed your account. Please check your inbox (and your "
+"spam folder) - you should have received an email with a confirmation "
+"link."
+msgstr ""
+
+#: app/templates/auth/inactive.html:12
+msgid "Didn't get the email?"
+msgstr ""
+
+#: app/templates/auth/inactive.html:14
+msgid "Resend"
+msgstr ""
+
+#: app/templates/auth/login.html:10
+msgid "New User?"
+msgstr ""
+
+#: app/templates/auth/login.html:11
+msgid "Click to Register!"
+msgstr ""
+
+#: app/templates/errors/404.html:4
+msgid "Wrong address"
+msgstr ""
+
+#: app/templates/errors/404.html:5 app/templates/errors/500.html:6
+msgid "Back"
+msgstr ""
+
+#: app/templates/errors/500.html:4
+msgid "An unexpected error has occurred"
+msgstr ""
+
+#: app/templates/errors/500.html:5
+msgid "The administrator has been notified. Sorry for the inconvenience!"
+msgstr ""
+
+#: app/templates/main/index.html:7
+msgid "Join Queue"
+msgstr ""
+
+#: app/templates/queue/manage_queue.html:21
+#: app/templates/queue/manage_queue.html:118
+msgid "Updated"
 msgstr ""
 
 #: app/templates/queue/manage_queue.html:22
@@ -49,11 +168,51 @@ msgstr ""
 msgid "Spam"
 msgstr ""
 
-#: app/templates/queue/manage_queue.html:118
-msgid "Updated"
-msgstr ""
-
 #: app/templates/queue/manage_queue.html:122
 msgid "Error"
+msgstr ""
+
+#: app/templates/queue/my_queues.html:6
+msgid "Your queues"
+msgstr ""
+
+#: app/templates/queue/my_queues.html:32
+msgid "Are you sure you want to forget?"
+msgstr ""
+
+#: app/templates/queue/my_queues.html:38
+msgid "This action cannot be undone"
+msgstr ""
+
+#: app/templates/queue/my_queues.html:42 app/templates/queue/my_queues.html:92
+msgid "No"
+msgstr ""
+
+#: app/templates/queue/my_queues.html:48 app/templates/queue/my_queues.html:97
+msgid "Yes"
+msgstr ""
+
+#: app/templates/queue/my_queues.html:58
+msgid "Owned queues"
+msgstr ""
+
+#: app/templates/queue/my_queues.html:82
+msgid "Are you sure you want to delete?"
+msgstr ""
+
+#: app/templates/queue/my_queues.html:88
+msgid "This action cannot be undone."
+msgstr ""
+
+#: app/templates/queue/queue.html:20
+msgid "Link has been copied"
+msgstr ""
+
+#: app/templates/queue/queue.html:21
+msgid "Link"
+msgstr ""
+
+#: app/templates/queue/queue.html:49
+msgid "Leave"
 msgstr ""
 
