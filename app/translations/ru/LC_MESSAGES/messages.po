@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-11 03:05+0300\n"
+"POT-Creation-Date: 2023-04-11 23:31+0300\n"
 "PO-Revision-Date: 2023-04-11 00:33+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
@@ -18,6 +18,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
+
+#: app/__init__.py:38
+msgid "Please login to access this page"
+msgstr "Пожалуйста войдите в аккаунт, чтобы получить доступ к данной странице"
+
+#: app/auth/decorators.py:11
+msgid "Please confirm your account!"
+msgstr "Пожалуйста, подтвердите свой аккаунт!"
 
 #: app/auth/forms.py:9 app/auth/forms.py:16
 msgid "Username"
@@ -49,13 +57,44 @@ msgid "Register"
 msgstr "Регистрация"
 
 #: app/auth/forms.py:26
-#, fuzzy
 msgid "This address is already in use."
 msgstr "Этот адрес уже используется"
 
 #: app/auth/forms.py:31
 msgid "This username is already in use."
 msgstr "Этот логин уже используется"
+
+#: app/auth/routes.py:21
+msgid "Invalid user or password"
+msgstr "Неверный логин или пароль"
+
+#: app/auth/routes.py:60
+msgid ""
+"Congratulations, you are now a registered user! Check your email for "
+"verification."
+msgstr ""
+"Поздравляем с регистрацией! Проверьте свою почту для подтверждения "
+"аккаунта"
+
+#: app/auth/routes.py:77
+msgid "Your account has already been confirmed."
+msgstr "Ваш аккаунт уже подтвержден"
+
+#: app/auth/routes.py:86
+msgid "A new confirmation email has been sent."
+msgstr "Новое письмо с подтверждением было отправлено"
+
+#: app/auth/routes.py:93
+msgid "Account already confirmed."
+msgstr "Аккаунт уже подтвержден"
+
+#: app/auth/routes.py:102
+msgid "You have confirmed your account. Thanks!"
+msgstr "Вы подтвердили свой аккаунт! Спасибо!"
+
+#: app/auth/routes.py:104
+msgid "The confirmation link is invalid or has expired."
+msgstr "Ссылка подверждения неверная или истекла"
 
 #: app/queue/forms.py:8
 msgid "Name"
@@ -85,9 +124,21 @@ msgstr "Найти"
 msgid "Delete"
 msgstr "Удалить"
 
-#: app/queue/forms.py:29 app/templates/queue/my_queues.html:21
+#: app/queue/forms.py:29 app/templates/queue/my_queues.html:20
 msgid "Forget"
 msgstr "Забыть"
+
+#: app/queue/routes.py:22
+msgid "Queue is closed."
+msgstr "Очередь закрыта"
+
+#: app/queue/routes.py:25
+msgid "You have already enter this queue."
+msgstr "Вы уже вошли в эту очередь"
+
+#: app/queue/routes.py:47
+msgid "You cant create more %(max_queues) than  queues"
+msgstr "Вы не можете создать больше чем %(max_queues) очередей"
 
 #: app/templates/base.html:42
 msgid "New Queue"
@@ -105,7 +156,7 @@ msgstr "Выйти"
 msgid "Login"
 msgstr "Войти"
 
-#: app/templates/auth/email_verification.html:2
+#: app/templates/auth/confirm_email.html:7
 msgid ""
 "Welcome! Thanks for signing up. Please follow this link to activate your "
 "account:"
@@ -159,68 +210,73 @@ msgstr "Администратор был уведомлен, извините �
 msgid "Join Queue"
 msgstr "Присоединиться"
 
-#: app/templates/queue/manage_queue.html:21
-#: app/templates/queue/manage_queue.html:118
-msgid "Updated"
-msgstr "Сохранено"
-
-#: app/templates/queue/manage_queue.html:22
-msgid "Save"
-msgstr "Сохранить"
-
-#: app/templates/queue/manage_queue.html:26
+#: app/templates/queue/manage_queue.html:34
 msgid "Clear"
 msgstr "Очистить"
 
-#: app/templates/queue/manage_queue.html:32
+#: app/templates/queue/manage_queue.html:40
+#, fuzzy
+msgid "Close"
+msgstr "Очистить"
+
+#: app/templates/queue/manage_queue.html:45
+msgid "Open"
+msgstr ""
+
+#: app/templates/queue/manage_queue.html:51
 msgid "Spam"
 msgstr "Спам"
-
-#: app/templates/queue/manage_queue.html:122
-msgid "Error"
-msgstr "Ошибка"
 
 #: app/templates/queue/my_queues.html:6
 msgid "Your queues"
 msgstr "Ваши очереди"
 
-#: app/templates/queue/my_queues.html:32
+#: app/templates/queue/my_queues.html:31
 msgid "Are you sure you want to forget?"
 msgstr "Вы уверены что хотите забыть?"
 
-#: app/templates/queue/my_queues.html:38
+#: app/templates/queue/my_queues.html:37
 msgid "This action cannot be undone"
 msgstr "Это действие не может быть отменено"
 
-#: app/templates/queue/my_queues.html:42 app/templates/queue/my_queues.html:92
+#: app/templates/queue/my_queues.html:41 app/templates/queue/my_queues.html:91
 msgid "No"
 msgstr "Нет"
 
-#: app/templates/queue/my_queues.html:48 app/templates/queue/my_queues.html:97
+#: app/templates/queue/my_queues.html:47 app/templates/queue/my_queues.html:96
 msgid "Yes"
 msgstr "Да"
 
-#: app/templates/queue/my_queues.html:58
+#: app/templates/queue/my_queues.html:57
 msgid "Owned queues"
 msgstr "Созданные очереди"
 
-#: app/templates/queue/my_queues.html:82
+#: app/templates/queue/my_queues.html:81
 msgid "Are you sure you want to delete?"
 msgstr "Вы уверены что хотите удалить?"
 
-#: app/templates/queue/my_queues.html:88
+#: app/templates/queue/my_queues.html:87
 msgid "This action cannot be undone."
 msgstr "Это действие не может быть отменено"
 
-#: app/templates/queue/queue.html:20
+#: app/templates/queue/queue.html:40
 msgid "Link has been copied"
 msgstr "Ссылка была скопирована"
 
-#: app/templates/queue/queue.html:21
+#: app/templates/queue/queue.html:41
 msgid "Link"
 msgstr "Ссылка"
 
-#: app/templates/queue/queue.html:49
+#: app/templates/queue/queue.html:77
 msgid "Leave"
 msgstr "Выйти"
+
+#~ msgid "Updated"
+#~ msgstr "Сохранено"
+
+#~ msgid "Save"
+#~ msgstr "Сохранить"
+
+#~ msgid "Error"
+#~ msgstr "Ошибка"
 

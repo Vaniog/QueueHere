@@ -9,24 +9,43 @@
     <div class="row">
         <div class="col-md-8 col-lg-7">
             <div class="mt-5 d-inline-flex align-items-end flex-wrap">
-                <a class="btn btn-outline-success me-4"
-                   href="{{ url_for('queue.queue', queue_id=queue.id) }}">
-                    <i class="bi bi-arrow-left"></i>
-                </a>
-                <div class="d-flex align-items-center me-4">
-                    <h1 class="mb-0">{{ queue.name }}</h1>
+                <div class="row w-100">
+                    <div class="col d-inline-flex align-items-center">
+                        <a class="btn btn-outline-success me-4"
+                           href="{{ url_for('queue.queue', queue_id=queue.id) }}">
+                            <i class="bi bi-arrow-left"></i>
+                        </a>
+                        <div class="d-flex align-items-center me-4">
+                            <h1 class="mb-0">
+                                {{ queue.name }}
+
+                                <span class="h4 text-info align-self-start">
+                            <i class="bi bi-lock-fill for-lock"
+                                    {% if queue.is_open %} style="display:none" {% endif %}></i>
+                            <i class="bi bi-unlock-fill for-unlock"
+                                    {% if not queue.is_open %} style="display:none" {% endif %}></i>
+                        </span>
+                            </h1>
+                        </div>
+                    </div>
                 </div>
-                <div class="btn-group">
-                    <button class="btn btn-success" id="update-btn"
-                            data-bs-toggle="popover" data-bs-content="{{ _('Updated') }}">
-                        {{ _('Save') }} <i class="bi bi-cloud-arrow-up"></i>
-                    </button>
-                    <button class="btn btn-outline-danger" id="clear-btn"
-                            data-bs-toggle="popover" data-bs-content="Cleared">
+                <div class="btn-group mt-3">
+                    <button class="btn btn-outline-danger" id="clear-btn">
                         {{ _('Clear') }} <i class="bi bi-eraser"></i>
                     </button>
 
-                    {% if current_user.is_admin %}
+                    <button id="close-btn"
+                            class="for-unlock btn btn-outline-primary"
+                            {% if not queue.is_open %} style="display:none" {% endif %}>
+                        {{ _('Close') }} <i class="bi bi-lock"></i>
+                    </button>
+                    <button id="open-btn"
+                            class="for-lock btn btn-outline-primary"
+                            {% if queue.is_open %} style="display:none" {% endif %}>
+                        {{ _('Open') }} <i class="bi bi-unlock"></i>
+                    </button>
+
+                    {% if current_user %}
                         <a href="{{ url_for('queue.spam_queue', queue_id = queue.id) }}"
                            class="btn btn-outline-secondary">
                             {{ _('Spam') }} <i class="bi bi-lightning"></i>
@@ -64,26 +83,11 @@
 {% endblock %}
 
 {% block app_scripts %}
-    <script>
-        Sortable.create(document.querySelector('#queue-table'), {
-            animation: 150,
-            handle: '.drag-handle'
-        });
-
-        document.querySelectorAll("#delete-btn").forEach((elem) => {
-            elem.addEventListener('click', () => {
-                elem.parentElement.style.transition = 'opacity 0.3s ease-in-out';
-                elem.parentElement.style.opacity = 0;
-                setTimeout(() => {
-                    elem.parentElement.remove();
-                }, 300);
-            })
-        })
-
-        update_btn = document.querySelector('#update-btn')
-
+    <script type="text/javascript">
         queue_id = '{{ queue.id }}';
-        update_btn.addEventListener('click', () => {
+
+
+        function UpdateServer() {
             const queueItems = document.getElementById('queue-table').querySelectorAll('.queue-item');
             const new_order = [];
 
@@ -91,16 +95,6 @@
                 const id = item.getAttribute('data-user');
                 new_order.push(id);
             });
-
-            const popoverInstance = new bootstrap.Popover(update_btn);
-
-            function LaunchPopover(text) {
-                update_btn.setAttribute('data-bs-content', text)
-                popoverInstance.show();
-                setTimeout(() => {
-                    popoverInstance.hide()
-                }, 1000)
-            }
 
             fetch('{{ url_for('queue.new_order') }}', {
                 method: 'POST',
@@ -115,12 +109,27 @@
                     throw new Error()
                 })
                 .then((result) => {
-                    LaunchPopover('{{ _('Updated') }}')
                 })
                 .catch((error) => {
                     console.log(error)
-                    LaunchPopover('{{ _('Error') }}')
                 })
+        }
+
+        sortable = Sortable.create(document.querySelector('#queue-table'), {
+            animation: 150,
+            handle: '.drag-handle',
+            onEnd: UpdateServer
+        });
+
+        document.querySelectorAll("#delete-btn").forEach((elem) => {
+            elem.addEventListener('click', () => {
+                elem.parentElement.style.transition = 'opacity 0.3s ease-in-out';
+                elem.parentElement.style.opacity = 0;
+                setTimeout(() => {
+                    elem.parentElement.remove();
+                    UpdateServer()
+                }, 300);
+            })
         })
 
         clear_btn = document.querySelector('#clear-btn')
@@ -128,12 +137,76 @@
             const queueItems = document.getElementById('queue-table').querySelectorAll('.queue-item');
             queueItems.forEach((elem) => {
                 elem.style.transition = 'opacity 0.3s ease-in-out';
-                elem.style.opacity = 0;
+                elem.style.opacity = 0
                 setTimeout(() => {
                     elem.remove();
                 }, 300);
             })
+            setTimeout(() => {
+                UpdateServer()
+            }, 350);
         })
+
+        open_btn = document.getElementById('open-btn')
+        close_btn = document.getElementById('close-btn')
+
+        is_open = ('{{ queue.is_open }}' === 'True');
+        for_lock_items = document.querySelectorAll('.for-lock')
+        for_unlock_items = document.querySelectorAll('.for-unlock')
+
+        open_btn.addEventListener('click', () => ToggleQueue())
+        close_btn.addEventListener('click', () => ToggleQueue())
+
+        function ToggleQueue() {
+            function HideItems(items) {
+                items.forEach((elem) => {
+                    elem.style.display = 'none'
+                })
+            }
+
+            function ShowItems(items) {
+                items.forEach((elem) => {
+                    elem.style.display = 'inline-block'
+                })
+            }
+
+            function ToggleItems() {
+                if (is_open) {
+                    HideItems(for_lock_items)
+                    ShowItems(for_unlock_items)
+                } else {
+                    HideItems(for_unlock_items)
+                    ShowItems(for_lock_items)
+                }
+            }
+
+            let url;
+            if (is_open) {
+                url = '{{ url_for('queue.close_queue', queue_id=queue.id) }}'
+            } else {
+                url = '{{ url_for('queue.open_queue', queue_id=queue.id) }}'
+            }
+
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    queue_id: queue_id,
+                })
+            })
+                .then((response) => {
+                    if (response.ok)
+                        return response.json()
+                    throw new Error()
+                })
+                .then((result) => {
+                    is_open = !(is_open)
+                    ToggleItems()
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
+
     </script>
 
 {% endblock %}

@@ -45,10 +45,10 @@ class Queue(db.Model):
         return '<Queue {}>'.format(self.name)
 
     def close(self):
-        pass
+        self.is_open = False
 
     def open(self):
-        pass
+        self.is_open = True
 
     def list(self):
         return UserQueue.query \

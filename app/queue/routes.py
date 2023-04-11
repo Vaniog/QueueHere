@@ -1,5 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request, current_app, abort
 from flask_login import login_required, current_user
+from flask_babel import _
 from app.queue.models import Queue, UserQueue
 from app.auth.models import User
 from app.auth.utils import cur_user_or_temp
@@ -18,15 +19,16 @@ def queue(queue_id):
 
     if join_form.validate_on_submit():
         if not cur_queue.is_open:
-            flash('Queue is closed.', 'danger')
-        if cur_queue.contains(cur_user):
-            flash('You have already enter this queue.', 'danger')
-            return redirect(url_for('queue.queue', queue_id=queue_id))
+            flash(_('Queue is closed.'), 'danger')
+        else:
+            if cur_queue.contains(cur_user):
+                flash(_('You have already enter this queue.'), 'danger')
+                return redirect(url_for('queue.queue', queue_id=queue_id))
 
-        cur_queue.add_member(cur_user, join_form.name_to_print.data)
-        cur_user.name_to_print = join_form.name_to_print.data
-        db.session.commit()
-        return redirect(url_for('queue.queue', queue_id=queue_id))
+            cur_queue.add_member(cur_user, join_form.name_to_print.data)
+            cur_user.name_to_print = join_form.name_to_print.data
+            db.session.commit()
+            return redirect(url_for('queue.queue', queue_id=queue_id))
 
     return render_template('queue/queue.html',
                            queue=cur_queue,
@@ -42,8 +44,7 @@ def create_queue():
     if form.validate_on_submit():
         max_queues = current_app.config['MAX_OWNED_QUEUES_PER_USER']
         if len(current_user.owned_queues) >= max_queues:
-            flash('You cant create more than ' +
-                  str(max_queues) + ' queues', 'danger')
+            flash(_(u'You cant create more %(max_queues) than  queues', max_queues=max_queues), 'danger')
             return redirect(url_for('queue.create_queue'))
 
         new_queue = Queue(name=form.name.data, admin=current_user)
@@ -120,7 +121,6 @@ def manage_queue(queue_id):
 
 @bp.route('/spam_queue/<queue_id>', methods=['GET'])
 @login_required
-@check_is_admin
 def spam_queue(queue_id):
     cur_queue = Queue.query.filter_by(id=queue_id).first_or_404()
     for i in range(2, 7):
@@ -157,5 +157,39 @@ def new_order():
         new_users_queue[i].index_in_queue = old_indices[i]
         new_users_queue[i].is_visible = True
 
+    db.session.commit()
+    return {}, 200
+
+
+@bp.route('/update_queue/open_queue', methods=['POST'])
+@login_required
+@check_is_confirmed
+def open_queue():
+    data = request.get_json(force=True)
+    queue_id = data['queue_id']
+
+    cur_queue = Queue.query.filter_by(id=queue_id).first_or_404()
+
+    if cur_queue.admin != current_user:
+        abort(400)
+
+    cur_queue.open()
+    db.session.commit()
+    return {}, 200
+
+
+@bp.route('/update_queue/close_queue', methods=['POST'])
+@login_required
+@check_is_confirmed
+def close_queue():
+    data = request.get_json(force=True)
+    queue_id = data['queue_id']
+
+    cur_queue = Queue.query.filter_by(id=queue_id).first_or_404()
+
+    if cur_queue.admin != current_user:
+        abort(400)
+
+    cur_queue.close()
     db.session.commit()
     return {}, 200

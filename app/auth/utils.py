@@ -20,6 +20,7 @@ def cur_user_or_temp():
         temp_user.username = temp_user.ip_address
         temp_user.email = temp_user.ip_address
         temp_user.is_guest = True
+        temp_user.name_to_print = ""
 
     return temp_user
 

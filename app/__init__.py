@@ -1,13 +1,13 @@
 from flask import Flask, request, current_app
 from app.config import Config
-from app.extensions import db, login, migrate, bootstrap, mail, moment, babel
+from app.extensions import db, login, migrate, bootstrap, mail, moment, babel, qrcode
 from app.utils import get_locale
 import logging
 from logging.handlers import RotatingFileHandler
 import os
 
 from bots.taskbot.taskbot import TaskBotThread
-import threading
+from flask_babel import lazy_gettext as _l
 
 
 def create_app(config_obj=Config()):
@@ -19,8 +19,8 @@ def create_app(config_obj=Config()):
     bootstrap.init_app(app)
     mail.init_app(app)
     moment.init_app(app)
-    babel.init_app(app,
-                   locale_selector=get_locale)
+    babel.init_app(app, locale_selector=get_locale)
+    qrcode.init_app(app)
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
@@ -35,9 +35,9 @@ def create_app(config_obj=Config()):
     app.register_blueprint(queue_bp)
 
     login.login_view = 'auth.login'
+    login.login_message = _l('Please login to access this page')
 
     app.app_context().push()
-    print("Created")
 
     if not app.debug:
         if not os.path.exists('logs'):

@@ -8,7 +8,6 @@
                 <div class="row mt-3" id="your-queue-row" data-queue="{{ user_queue.queue_id }}">
                     <div class="col-6 text-center">
                         <a class="link-primary text-decoration-none h5 align-middle"
-                        <a class="link-primary text-decoration-none h5 align-middle"
                            href={{ url_for('queue.queue', queue_id=user_queue.queue_id) }}>
                             {{ user_queue.queue.name }}
                         </a>
