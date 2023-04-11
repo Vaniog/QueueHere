@@ -5,5 +5,5 @@ app.db
 venv
 cache
 gunicorn.log
-.env
+app/.env
 scripts/

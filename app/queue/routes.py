@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request, current_app, abort, session
+from flask import render_template, flash, redirect, url_for, request, current_app, abort
 from flask_login import login_required, current_user
 from app.queue.models import Queue, UserQueue
 from app.auth.models import User
@@ -7,7 +7,6 @@ from app.auth.decorators import check_is_confirmed, check_is_admin
 from app.extensions import db
 from app.queue.forms import CreateQueueForm, JoinQueueForm, KillQueueForm, ForgetQueueForm
 from app.queue import bp
-from werkzeug.urls import url_parse
 
 
 @bp.route('/queue/<queue_id>', methods=['GET', 'POST'])
@@ -18,6 +17,8 @@ def queue(queue_id):
     cur_user = cur_user_or_temp()
 
     if join_form.validate_on_submit():
+        if not cur_queue.is_open:
+            flash('Queue is closed.', 'danger')
         if cur_queue.contains(cur_user):
             flash('You have already enter this queue.', 'danger')
             return redirect(url_for('queue.queue', queue_id=queue_id))

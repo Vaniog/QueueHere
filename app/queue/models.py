@@ -1,3 +1,5 @@
+import enum
+
 from app import db
 
 import shortuuid
@@ -31,13 +33,22 @@ class Queue(db.Model):
     id = db.Column(db.String(10), primary_key=True, default=generate_queue_id)
     name = db.Column(db.String(100), nullable=False)
     members = db.relationship('UserQueue', back_populates='queue', cascade='all, delete, merge, save-update')
+    tasks = db.relationship('QueueTask', back_populates='queue', cascade='all, delete, merge, save-update')
     last_index = db.Column(db.Integer, nullable=False, default=0)
+
+    is_open = db.Column(db.Boolean, nullable=False, default=True)
 
     admin_id = db.Column(db.Integer(), db.ForeignKey('user.id'), nullable=False)
     admin = db.relationship('User', back_populates='owned_queues')
 
     def __repr__(self):
         return '<Queue {}>'.format(self.name)
+
+    def close(self):
+        pass
+
+    def open(self):
+        pass
 
     def list(self):
         return UserQueue.query \
@@ -77,3 +88,38 @@ class Queue(db.Model):
 
     def remove_member(self, user):
         UserQueue.query.filter_by(member_id=user.id, queue_id=self.id).delete()
+
+
+class TaskEnum(enum.Enum):
+    clear = 1
+    close = 2
+    open = 3
+
+
+class QueueTask(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+
+    queue_id = db.Column(db.String(10), db.ForeignKey('queue.id', ondelete="CASCADE"), primary_key=True)
+    queue = db.relationship("Queue", back_populates="tasks", passive_deletes=True)
+
+    action = db.Column(db.Enum(TaskEnum), nullable=False)  # clear, close, open
+    execute_time = db.Column(db.DateTime, nullable=False, index=True)
+
+    @staticmethod
+    def get_nearest():
+        return QueueTask.query.order_by(QueueTask.execute_time).first()
+
+    def execute_if_needed(self):
+        if self.execute_time <= datetime.utcnow():
+            self.execute()
+            self.delete()
+            return True
+        return False
+
+    def execute(self):
+        if self.action == TaskEnum.clear:
+            self.queue.clear()
+        elif self.action == TaskEnum.close:
+            self.queue.close()
+        elif self.action == TaskEnum.open:
+            self.queue.open()

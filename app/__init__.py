@@ -1,11 +1,13 @@
 from flask import Flask, request, current_app
 from app.config import Config
 from app.extensions import db, login, migrate, bootstrap, mail, moment, babel
-from flask_babel import _, get_locale as get_locale_babel
 from app.utils import get_locale
 import logging
 from logging.handlers import RotatingFileHandler
 import os
+
+from bots.taskbot.taskbot import TaskBotThread
+import threading
 
 
 def create_app(config_obj=Config()):
@@ -35,6 +37,7 @@ def create_app(config_obj=Config()):
     login.login_view = 'auth.login'
 
     app.app_context().push()
+    print("Created")
 
     if not app.debug:
         if not os.path.exists('logs'):
@@ -49,6 +52,9 @@ def create_app(config_obj=Config()):
 
         app.logger.setLevel(logging.INFO)
         app.logger.info('Microblog startup')
+
+    bot_thread = TaskBotThread(app)
+    bot_thread.start()
 
     return app
 
