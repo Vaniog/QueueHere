@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-14 03:01+0300\n"
+"POT-Creation-Date: 2023-04-14 14:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/__init__.py:38
+#: app/__init__.py:40
 msgid "Please login to access this page"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgid "Repeat Password"
 msgstr ""
 
 #: app/auth/forms.py:21 app/templates/auth/register.html:7
-#: app/templates/base.html:67
+#: app/templates/base.html:75
 msgid "Register"
 msgstr ""
 
@@ -112,11 +112,11 @@ msgstr ""
 msgid "Queue ID"
 msgstr ""
 
-#: app/queue/forms.py:19
+#: app/queue/forms.py:19 app/templates/base.html:49
 msgid "Find"
 msgstr ""
 
-#: app/queue/forms.py:24 app/templates/queue/manage_queue.html:114
+#: app/queue/forms.py:24
 msgid "Delete"
 msgstr ""
 
@@ -136,19 +136,19 @@ msgstr ""
 msgid "You cant create more %(max_queues) than  queues"
 msgstr ""
 
-#: app/templates/base.html:46
-msgid "New Queue"
+#: app/templates/base.html:54
+msgid "New"
 msgstr ""
 
-#: app/templates/base.html:51
+#: app/templates/base.html:59
 msgid "Queues"
 msgstr ""
 
-#: app/templates/base.html:55
+#: app/templates/base.html:63
 msgid "Logout"
 msgstr ""
 
-#: app/templates/base.html:63
+#: app/templates/base.html:71
 msgid "Login"
 msgstr ""
 
@@ -270,14 +270,6 @@ msgstr ""
 
 #: app/templates/queue/manage_queue.html:105
 msgid "Add task"
-msgstr ""
-
-#: app/templates/queue/manage_queue.html:112
-msgid "Task"
-msgstr ""
-
-#: app/templates/queue/manage_queue.html:113
-msgid "Time"
 msgstr ""
 
 #: app/templates/queue/my_queues.html:6

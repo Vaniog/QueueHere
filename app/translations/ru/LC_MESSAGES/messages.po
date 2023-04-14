@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-14 03:01+0300\n"
-"PO-Revision-Date: 2023-04-11 00:33+0300\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2023-04-14 14:25+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/__init__.py:38
+#: app/__init__.py:40
 msgid "Please login to access this page"
 msgstr "Пожалуйста войдите в аккаунт, чтобы получить доступ к данной странице"
 
@@ -52,7 +52,7 @@ msgid "Repeat Password"
 msgstr "Повторите пароль"
 
 #: app/auth/forms.py:21 app/templates/auth/register.html:7
-#: app/templates/base.html:67
+#: app/templates/base.html:75
 msgid "Register"
 msgstr "Регистрация"
 
@@ -111,17 +111,17 @@ msgstr "Войти под именем"
 
 #: app/queue/forms.py:14
 msgid "Join"
-msgstr "Войти"
+msgstr "Найти очередь"
 
 #: app/queue/forms.py:18 app/queue/forms.py:23 app/queue/forms.py:28
 msgid "Queue ID"
 msgstr "ID Очереди"
 
-#: app/queue/forms.py:19
+#: app/queue/forms.py:19 app/templates/base.html:49
 msgid "Find"
 msgstr "Найти"
 
-#: app/queue/forms.py:24 app/templates/queue/manage_queue.html:114
+#: app/queue/forms.py:24
 msgid "Delete"
 msgstr "Удалить"
 
@@ -141,19 +141,19 @@ msgstr "Вы уже вошли в эту очередь"
 msgid "You cant create more %(max_queues) than  queues"
 msgstr "Вы не можете создать больше чем %(max_queues) очередей"
 
-#: app/templates/base.html:46
-msgid "New Queue"
+#: app/templates/base.html:54
+msgid "New"
 msgstr "Создать"
 
-#: app/templates/base.html:51
+#: app/templates/base.html:59
 msgid "Queues"
 msgstr "Очереди"
 
-#: app/templates/base.html:55
+#: app/templates/base.html:63
 msgid "Logout"
 msgstr "Выйти"
 
-#: app/templates/base.html:63
+#: app/templates/base.html:71
 msgid "Login"
 msgstr "Войти"
 
@@ -216,7 +216,7 @@ msgstr "Присоединиться"
 msgid "Register to get access to all the features:"
 msgstr "Зарегистрируйся чтобы получить доступ ко всем возможностям"
 
-#: app/templates/main/index.html:17]
+#: app/templates/main/index.html:17
 msgid "Create queues"
 msgstr "Создавай очереди"
 
@@ -282,14 +282,6 @@ msgstr "Спам"
 #: app/templates/queue/manage_queue.html:105
 msgid "Add task"
 msgstr "Добавить"
-
-#: app/templates/queue/manage_queue.html:112
-msgid "Task"
-msgstr "Задача"
-
-#: app/templates/queue/manage_queue.html:113
-msgid "Time"
-msgstr "Время"
 
 #: app/templates/queue/my_queues.html:6
 msgid "Your queues"
@@ -359,4 +351,13 @@ msgstr "Выйти"
 
 #~ msgid "Select time"
 #~ msgstr "Выберите время"
+
+#~ msgid "New Queue"
+#~ msgstr "Создать"
+
+#~ msgid "Task"
+#~ msgstr "Задача"
+
+#~ msgid "Time"
+#~ msgstr "Время"
 

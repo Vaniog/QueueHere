@@ -30,7 +30,8 @@
 <nav class="navbar navbar-expand-sm text-bg-primary nav-pills">
     <div class="container-fluid">
         <a href="{{ url_for('main.index') }}" class="navbar-brand text-bg-primary d-flex align-items-end">
-            <img src="{{ url_for('static', filename='favicon.ico') }}" style="height: 1.5em; margin:0 -0.25em 0 -0.25em"/>ueueHere
+            <img src="{{ url_for('static', filename='favicon.ico') }}"
+                 style="height: 1.5em; margin:0 -0.25em 0 -0.25em"/>ueueHere
         </a>
 
         <button class="navbar-toggler"
@@ -43,10 +44,14 @@
 
         <div class="collapse navbar-collapse align-items-center" id="nav">
             <ul class="navbar-nav w-100">
+                <li class="nav-item">
+                    <a href="{{ url_for('main.index') }}"
+                       class="nav-link text-bg-primary">{{ _('Find') }}</a>
+                </li>
                 {% if current_user.is_authenticated %}
                     <li class="nav-item">
                         <a href="{{ url_for('queue.create_queue') }}"
-                           class="nav-link text-bg-primary">{{ _('New Queue') }}</a>
+                           class="nav-link text-bg-primary">{{ _('New') }}</a>
                     </li>
 
                     <li class="nav-item">

@@ -12,7 +12,7 @@ def index():
     form = FindQueueForm()
     if form.validate_on_submit():
         return redirect(url_for('queue.queue', queue_id=form.queue_id.data))
-    return render_template('main/index.html', title='Home', find_queue_form=form)
+    return render_template('main/index.html', find_queue_form=form)
 
 
 @bp.before_app_request
