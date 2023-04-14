@@ -209,16 +209,12 @@ def add_task():
 
     task_action = data['task_action']
     task_time = data['task_time']
-    if TaskEnum[task_action] is None:
-        abort(400)
-    try:
-        task = QueueTask(queue_id=queue_id,
-                         action=TaskEnum[task_action],
-                         execute_time=task_time)
-        db.session.add(task)
-        db.session.commit()
-    except:
-        abort(400)
+
+    task = QueueTask(queue_id=queue_id,
+                     action=TaskEnum[task_action],
+                     execute_time=task_time)
+    db.session.add(task)
+    db.session.commit()
 
     return {}, 200
 
