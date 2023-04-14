@@ -23,10 +23,21 @@ class UserQueue(db.Model):
 
 
 def generate_queue_id():
-    new_id = shortuuid.ShortUUID().random(length=5)
-    while Queue.query.filter_by(id=new_id).first() is not None:
-        new_id = shortuuid.ShortUUID().random(length=5)
-    return new_id
+    try_times = 5
+
+    def try_to_generate_from(alphabet):
+        for i in range(try_times):
+            new_id = shortuuid.ShortUUID(alphabet=alphabet).random(length=5)
+            if Queue.query.filter_by(id=new_id).first() is None:
+                return new_id
+        return None
+
+    return try_to_generate_from('0123456789') or \
+        try_to_generate_from('ABCDEFGHIJKLMNOPQRSTUVWXYZ') or \
+        try_to_generate_from('abcdefghijklmnopqrstuvwxyz') or \
+        try_to_generate_from('0123456789ABCDEFGHJKLMNPQRSTUVWXYZ') or \
+        try_to_generate_from('0123456789abcdefghijklmnopqrstuvwxyz') or \
+        try_to_generate_from('23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz')
 
 
 class Queue(db.Model):
@@ -55,6 +66,18 @@ class Queue(db.Model):
             .filter_by(queue_id=self.id, is_visible=True) \
             .order_by(UserQueue.index_in_queue)
 
+    def tasks_sorted(self):
+        return sorted(self.tasks, key=lambda task: task.execute_time)
+
+    def next_clearing(self):
+        return next(x for x in self.tasks_sorted() if x.action == TaskEnum.clear)
+
+    def next_opening(self):
+        return next(x for x in self.tasks_sorted() if x.action == TaskEnum.open)
+
+    def next_closing(self):
+        return next(x for x in self.tasks_sorted() if x.action == TaskEnum.close)
+
     def get_user_queue(self, user):
         return UserQueue.query.filter_by(queue_id=self.id, member_id=user.id).first()
 
@@ -75,7 +98,9 @@ class Queue(db.Model):
             was_user.is_visible = True
             was_user.update_arrive_time()
             return
-        uq = UserQueue(name_printed=name_printed, index_in_queue=self.last_index)
+        uq = UserQueue(name_printed=name_printed,
+                       index_in_queue=self.last_index,
+                       arrive_time=datetime.utcnow())
         uq.member = user
         self.members.append(uq)
 
@@ -95,15 +120,21 @@ class TaskEnum(enum.Enum):
     close = 2
     open = 3
 
+    def __str__(self):
+        return self.name
+
 
 class QueueTask(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
 
-    queue_id = db.Column(db.String(10), db.ForeignKey('queue.id', ondelete="CASCADE"), primary_key=True)
+    queue_id = db.Column(db.String(10), db.ForeignKey('queue.id', ondelete="CASCADE"), nullable=False)
     queue = db.relationship("Queue", back_populates="tasks", passive_deletes=True)
 
     action = db.Column(db.Enum(TaskEnum), nullable=False)  # clear, close, open
     execute_time = db.Column(db.DateTime, nullable=False, index=True)
+
+    def __repr__(self):
+        return "<QueueTask {}: {}>".format(self.action, self.execute_time)
 
     @staticmethod
     def get_nearest():
@@ -112,7 +143,7 @@ class QueueTask(db.Model):
     def execute_if_needed(self):
         if self.execute_time <= datetime.utcnow():
             self.execute()
-            self.delete()
+            db.session.delete(self)
             return True
         return False
 

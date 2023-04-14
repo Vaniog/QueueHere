@@ -8,4 +8,50 @@
             {{ render_form(find_queue_form) }}
         </div>
     </div>
+
+    {% if not current_user.is_authenticated %}
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-8 col-lg-6 d-flex flex-column align-items-center
+        border border-2 rounded-3 p-3">
+                <h5 class="text-center">{{ _('Register to get access to all the features:') }}</h5>
+                <span>{{ _('Create queues') }}</span>
+
+                <span>
+                {{ _('Manage your queues') }}
+                <i class="bi bi-info-lg" role="button" type="button" data-bs-toggle="collapse"
+                   data-bs-target="#info-manage" aria-expanded="false"
+                   aria-controls="info-manage">
+                </i>
+            </span>
+
+                <div class="collapse" id="info-manage">
+                    <div class="d-flex flex-column align-items-center m-2">
+                        <span>{{ _('Swap members') }} <i class="bi bi-arrows-move"></i></span>
+                        <span>{{ _('Remove members') }} <i class="bi bi-x-circle text-danger"></i></span>
+                        <span>{{ _('Clear the queue') }} <i class="bi bi-eraser-fill text-danger"></i></span>
+                        <span>{{ _('Lock and unlock') }}
+                        <i class="bi bi-lock-fill text-info"></i>
+                        <i class="bi bi-unlock-fill text-info"></i></span>
+                    </div>
+                </div>
+
+                <span>{{ _('Add scheduled tasks') }}
+                <i class="bi bi-info-lg" role="button" type="button" data-bs-toggle="collapse"
+                   data-bs-target="#info-scheduled" aria-expanded="false"
+                   aria-controls="info-scheduled">
+                </i>
+            </span>
+                <div class="collapse" id="info-scheduled">
+                    <div class="d-flex flex-column align-items-center m-2">
+                        <span>{{ _('Choose time, date and action') }}</span>
+                        <span>
+                        <i class="bi bi-eraser-fill text-danger"></i>
+                        <i class="bi bi-lock-fill text-primary"></i>
+                        <i class="bi bi-unlock-fill text-primary"></i></span>
+                    </div>
+                </div>
+                <span>{{ _('Remember queues') }}</span>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

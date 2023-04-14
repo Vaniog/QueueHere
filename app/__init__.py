@@ -22,6 +22,8 @@ def create_app(config_obj=Config()):
     babel.init_app(app, locale_selector=get_locale)
     qrcode.init_app(app)
 
+    app.jinja_env.globals.update(get_locale=get_locale)
+
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
 

@@ -50,7 +50,7 @@ def register():
         db.session.commit()
 
         token = generate_token(new_user.email)
-        confirm_url = url_for("auth.confirm_email", token=token, _external=True)
+        confirm_url = url_for("auth.confirm_email", user_id=current_user.id, token=token, _external=True)
         html = render_template("auth/confirm_email.html", confirm_url=confirm_url)
         subject = "Please confirm your email"
         send_email(new_user.email, subject, html)
@@ -78,7 +78,7 @@ def resend_confirmation():
         return redirect(url_for("main.index"))
 
     token = generate_token(current_user.email)
-    confirm_url = url_for("auth.confirm_email", token=token, _external=True)
+    confirm_url = url_for("auth.confirm_email", user_id=current_user.id, token=token, _external=True)
     html = render_template("auth/confirm_email.html", confirm_url=confirm_url)
     subject = "Please confirm your email"
     send_email(current_user.email, subject, html)
@@ -87,13 +87,13 @@ def resend_confirmation():
     return redirect(url_for("auth.inactive"))
 
 
-@bp.route("/confirm_email/<token>")
-def confirm_email(token):
-    if current_user.is_confirmed:
+@bp.route("/confirm_email/<user_id>/<token>")
+def confirm_email(user_id, token):
+    user = User.query.filter_by(id=user_id).first_or_404()
+    if user.is_confirmed:
         flash(_("Account already confirmed."), "success")
         return redirect(url_for("main.index"))
     email = confirm_token(token)
-    user = User.query.filter_by(email=current_user.email).first_or_404()
     if user.email == email:
         user.is_confirmed = True
         user.confirmed_on = datetime.now()

@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request, current_app, abort
 from flask_login import login_required, current_user
 from flask_babel import _
-from app.queue.models import Queue, UserQueue
+from app.queue.models import Queue, UserQueue, QueueTask, TaskEnum
 from app.auth.models import User
 from app.auth.utils import cur_user_or_temp
 from app.auth.decorators import check_is_confirmed, check_is_admin
@@ -192,4 +192,65 @@ def close_queue():
 
     cur_queue.close()
     db.session.commit()
+    return {}, 200
+
+
+@bp.route('/update_queue/add_task', methods=['POST'])
+@login_required
+@check_is_confirmed
+def add_task():
+    data = request.get_json(force=True)
+    queue_id = data['queue_id']
+
+    cur_queue = Queue.query.filter_by(id=queue_id).first_or_404()
+
+    if cur_queue.admin != current_user:
+        abort(400)
+
+    task_action = data['task_action']
+    task_time = data['task_time']
+    if TaskEnum[task_action] is None:
+        abort(400)
+    try:
+        task = QueueTask(queue_id=queue_id,
+                         action=TaskEnum[task_action],
+                         execute_time=task_time)
+        db.session.add(task)
+        db.session.commit()
+    except:
+        abort(400)
+
+    return {}, 200
+
+
+@bp.route('/get_queue_tasks/<queue_id>', methods=['POST', 'GET'])
+@login_required
+@check_is_confirmed
+def get_queue_tasks(queue_id):
+    cur_queue = Queue.query.filter_by(id=queue_id).first_or_404()
+
+    res = []
+    for task in cur_queue.tasks_sorted():
+        res.append({
+            'task_action': str(task.action),
+            'task_time': task.execute_time,
+            'task_id': task.id
+        })
+    return res, 200
+
+
+@bp.route('/delete_queue_task', methods=['POST', 'GET'])
+@login_required
+@check_is_confirmed
+def delete_queue_task():
+    data = request.get_json(force=True)
+    task_id = data['task_id']
+    task = QueueTask.query.filter_by(id=task_id).first_or_404()
+
+    if task.queue.admin_id != current_user.id:
+        abort(400)
+
+    QueueTask.query.filter_by(id=task_id).delete()
+    db.session.commit()
+
     return {}, 200

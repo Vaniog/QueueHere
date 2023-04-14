@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 {% from 'bootstrap5/nav.html' import render_nav_item %}
 
-<html data-bs-theme="dark">
+<html data-bs-theme="light">
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/load_theme.js') }}">
+</script>
+
 <head>
     <title>
         {% if title %}
@@ -25,37 +28,47 @@
 <body>
 <nav class="navbar navbar-expand-sm text-bg-primary nav-pills">
     <div class="container-fluid">
-        <a href="{{ url_for('main.index') }}" class="navbar-brand">QueueHere</a>
+        <a href="{{ url_for('main.index') }}" class="navbar-brand text-bg-primary">QueueHere</a>
 
         <button class="navbar-toggler"
                 data-bs-toggle="collapse"
                 data-bs-target="#nav"
                 aria-controls="nav"
                 aria-label="Expand">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon text-bg-primary"></span>
         </button>
 
         <div class="collapse navbar-collapse align-items-center" id="nav">
             <ul class="navbar-nav w-100">
                 {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a href="{{ url_for('queue.create_queue') }}" class="nav-link">{{ _('New Queue') }}</a>
+                        <a href="{{ url_for('queue.create_queue') }}"
+                           class="nav-link text-bg-primary">{{ _('New Queue') }}</a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ url_for('queue.my_queues') }}" class="nav-link">{{ _('Queues') }}</a>
+                        <a href="{{ url_for('queue.my_queues') }}"
+                           class="nav-link text-bg-primary">{{ _('Queues') }}</a>
                     </li>
 
                     <li class="nav-item ms-sm-auto">
-                        <a href="{{ url_for('auth.logout') }}" class="nav-link">{{ _('Logout') }}</a>
+                        <a href="{{ url_for('auth.logout') }}" class="nav-link text-bg-primary">{{ _('Logout') }}</a>
                     </li>
+
+                    <button class="btn text-bg-primary d-flex justify-content-start" id="theme-btn">
+                        <i class="bi bi-sun-fill h5 m-0 p-0"></i>
+                    </button>
                 {% else %}
                     <li class="nav-item">
-                        <a href="{{ url_for('auth.login') }}" class="nav-link">{{ _('Login') }}</a>
+                        <a href="{{ url_for('auth.login') }}" class="nav-link text-bg-primary">{{ _('Login') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url_for('auth.register') }}" class="nav-link">{{ _('Register') }}</a>
+                        <a href="{{ url_for('auth.register') }}"
+                           class="nav-link text-bg-primary">{{ _('Register') }}</a>
                     </li>
+                    <button class="btn text-bg-primary d-flex justify-content-start ms-auto" id="theme-btn">
+                        <i class="bi bi-sun-fill h5 m-0 p-0"></i>
+                    </button>
                 {% endif %}
             </ul>
         </div>
@@ -91,6 +104,10 @@
         crossorigin="anonymous"></script>
 
 {{ moment.include_moment() }}
+{{ moment.lang(get_locale()) }}
 {% block app_scripts %}{% endblock %}
+
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/base.js') }}">
+</script>
 </body>
 </html>

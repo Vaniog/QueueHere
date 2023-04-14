@@ -10,12 +10,13 @@ class TaskBotThread(threading.Thread):
         threading.Thread.__init__(self)
         self.daemon = True
 
-    UPDATE_FREQUENCY = 1  # in seconds
+    UPDATE_FREQUENCY = 2  # in seconds
 
     def run(self):
         with self.current_app.app_context():
             while True:
                 nearest = QueueTask.get_nearest()
-                if nearest is not None and nearest.execute_if_need():
+                if nearest is not None and nearest.execute_if_needed():
                     db.session.commit()
                 time.sleep(self.UPDATE_FREQUENCY)
+                db.session.close()

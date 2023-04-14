@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-11 23:31+0300\n"
+"POT-Creation-Date: 2023-04-14 03:01+0300\n"
 "PO-Revision-Date: 2023-04-11 00:33+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
@@ -52,7 +52,7 @@ msgid "Repeat Password"
 msgstr "Повторите пароль"
 
 #: app/auth/forms.py:21 app/templates/auth/register.html:7
-#: app/templates/base.html:57
+#: app/templates/base.html:67
 msgid "Register"
 msgstr "Регистрация"
 
@@ -74,7 +74,8 @@ msgid ""
 "verification."
 msgstr ""
 "Поздравляем с регистрацией! Проверьте свою почту для подтверждения "
-"аккаунта"
+"аккаунта. Проверьте спам. Если вы используете Яндекс почту, для открытия "
+"ссылки из письма, надо подтвердить что письмо не спам."
 
 #: app/auth/routes.py:77
 msgid "Your account has already been confirmed."
@@ -84,7 +85,7 @@ msgstr "Ваш аккаунт уже подтвержден"
 msgid "A new confirmation email has been sent."
 msgstr "Новое письмо с подтверждением было отправлено"
 
-#: app/auth/routes.py:93
+#: app/auth/routes.py:94
 msgid "Account already confirmed."
 msgstr "Аккаунт уже подтвержден"
 
@@ -120,7 +121,7 @@ msgstr "ID Очереди"
 msgid "Find"
 msgstr "Найти"
 
-#: app/queue/forms.py:24
+#: app/queue/forms.py:24 app/templates/queue/manage_queue.html:114
 msgid "Delete"
 msgstr "Удалить"
 
@@ -140,19 +141,19 @@ msgstr "Вы уже вошли в эту очередь"
 msgid "You cant create more %(max_queues) than  queues"
 msgstr "Вы не можете создать больше чем %(max_queues) очередей"
 
-#: app/templates/base.html:42
+#: app/templates/base.html:46
 msgid "New Queue"
 msgstr "Создать"
 
-#: app/templates/base.html:46
+#: app/templates/base.html:51
 msgid "Queues"
 msgstr "Очереди"
 
-#: app/templates/base.html:50
+#: app/templates/base.html:55
 msgid "Logout"
 msgstr "Выйти"
 
-#: app/templates/base.html:54
+#: app/templates/base.html:63
 msgid "Login"
 msgstr "Войти"
 
@@ -172,7 +173,8 @@ msgid ""
 msgstr ""
 "Вы не подтвердили свою учетную запись. Пожалуйста, проверьте свой "
 "почтовый ящик (и папку спам) - вы должны были получить письмо со ссылкой "
-"для подтверждения."
+"для подтверждения. Если вы используете Яндекс почту, для открытия ссылки "
+"из письма, надо подтвердить что письмо не спам."
 
 #: app/templates/auth/inactive.html:12
 msgid "Didn't get the email?"
@@ -210,22 +212,84 @@ msgstr "Администратор был уведомлен, извините �
 msgid "Join Queue"
 msgstr "Присоединиться"
 
-#: app/templates/queue/manage_queue.html:34
+#: app/templates/main/index.html:16
+msgid "Register to get access to all the features:"
+msgstr "Зарегистрируйся чтобы получить доступ ко всем возможностям"
+
+#: app/templates/main/index.html:17]
+msgid "Create queues"
+msgstr "Создавай очереди"
+
+#: app/templates/main/index.html:20
+msgid "Manage your queues"
+msgstr "Управляй очередями"
+
+#: app/templates/main/index.html:29
+msgid "Swap members"
+msgstr "Перемещай участников"
+
+#: app/templates/main/index.html:30
+msgid "Remove members"
+msgstr "Удаляй участников"
+
+#: app/templates/main/index.html:31
+msgid "Clear the queue"
+msgstr "Очищай очередь"
+
+#: app/templates/main/index.html:32
+msgid "Lock and unlock"
+msgstr "Закрывай и открывай"
+
+#: app/templates/main/index.html:38
+msgid "Add scheduled tasks"
+msgstr "Добавляй запланированные задачи"
+
+#: app/templates/main/index.html:46
+msgid "Choose time, date and action"
+msgstr "Выбери время, дату и действие"
+
+#: app/templates/main/index.html:53
+msgid "Remember queues"
+msgstr "Запоминай очереди"
+
+#: app/templates/queue/create_queue.html:7
+msgid "Create queue"
+msgstr "Создать очередь"
+
+#: app/templates/queue/manage_queue.html:71
+#: app/templates/queue/manage_queue.html:95
 msgid "Clear"
 msgstr "Очистить"
 
-#: app/templates/queue/manage_queue.html:40
-#, fuzzy
+#: app/templates/queue/manage_queue.html:72
+#: app/templates/queue/manage_queue.html:93
 msgid "Close"
-msgstr "Очистить"
+msgstr "Закрыть"
 
-#: app/templates/queue/manage_queue.html:45
+#: app/templates/queue/manage_queue.html:73
+#: app/templates/queue/manage_queue.html:94
 msgid "Open"
-msgstr ""
+msgstr "Открыть"
 
-#: app/templates/queue/manage_queue.html:51
+#: app/templates/queue/manage_queue.html:74
+msgid "Tasks"
+msgstr "Задачи"
+
+#: app/templates/queue/manage_queue.html:75
 msgid "Spam"
 msgstr "Спам"
+
+#: app/templates/queue/manage_queue.html:105
+msgid "Add task"
+msgstr "Добавить"
+
+#: app/templates/queue/manage_queue.html:112
+msgid "Task"
+msgstr "Задача"
+
+#: app/templates/queue/manage_queue.html:113
+msgid "Time"
+msgstr "Время"
 
 #: app/templates/queue/my_queues.html:6
 msgid "Your queues"
@@ -259,15 +323,19 @@ msgstr "Вы уверены что хотите удалить?"
 msgid "This action cannot be undone."
 msgstr "Это действие не может быть отменено"
 
-#: app/templates/queue/queue.html:40
-msgid "Link has been copied"
-msgstr "Ссылка была скопирована"
+#: app/templates/queue/queue.html:63
+msgid "Next clearing"
+msgstr "Следующая очистка"
 
-#: app/templates/queue/queue.html:41
-msgid "Link"
-msgstr "Ссылка"
+#: app/templates/queue/queue.html:69
+msgid "Next closing"
+msgstr "Следующее закрытие"
 
-#: app/templates/queue/queue.html:77
+#: app/templates/queue/queue.html:75
+msgid "Next opening"
+msgstr "Следующее открытие"
+
+#: app/templates/queue/queue.html:104
 msgid "Leave"
 msgstr "Выйти"
 
@@ -279,4 +347,16 @@ msgstr "Выйти"
 
 #~ msgid "Error"
 #~ msgstr "Ошибка"
+
+#~ msgid "Link has been copied"
+#~ msgstr "Ссылка была скопирована"
+
+#~ msgid "Link"
+#~ msgstr "Ссылка"
+
+#~ msgid "Select action"
+#~ msgstr "Выберите задачу"
+
+#~ msgid "Select time"
+#~ msgstr "Выберите время"
 

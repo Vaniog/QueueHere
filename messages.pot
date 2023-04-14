@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-11 23:31+0300\n"
+"POT-Creation-Date: 2023-04-14 03:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,7 @@ msgid "Repeat Password"
 msgstr ""
 
 #: app/auth/forms.py:21 app/templates/auth/register.html:7
-#: app/templates/base.html:57
+#: app/templates/base.html:67
 msgid "Register"
 msgstr ""
 
@@ -80,7 +80,7 @@ msgstr ""
 msgid "A new confirmation email has been sent."
 msgstr ""
 
-#: app/auth/routes.py:93
+#: app/auth/routes.py:94
 msgid "Account already confirmed."
 msgstr ""
 
@@ -116,7 +116,7 @@ msgstr ""
 msgid "Find"
 msgstr ""
 
-#: app/queue/forms.py:24
+#: app/queue/forms.py:24 app/templates/queue/manage_queue.html:114
 msgid "Delete"
 msgstr ""
 
@@ -136,19 +136,19 @@ msgstr ""
 msgid "You cant create more %(max_queues) than  queues"
 msgstr ""
 
-#: app/templates/base.html:42
+#: app/templates/base.html:46
 msgid "New Queue"
 msgstr ""
 
-#: app/templates/base.html:46
+#: app/templates/base.html:51
 msgid "Queues"
 msgstr ""
 
-#: app/templates/base.html:50
+#: app/templates/base.html:55
 msgid "Logout"
 msgstr ""
 
-#: app/templates/base.html:54
+#: app/templates/base.html:63
 msgid "Login"
 msgstr ""
 
@@ -201,20 +201,83 @@ msgstr ""
 msgid "Join Queue"
 msgstr ""
 
-#: app/templates/queue/manage_queue.html:34
+#: app/templates/main/index.html:16
+msgid "Register to get access to all the features:"
+msgstr ""
+
+#: app/templates/main/index.html:17
+msgid "Create queues"
+msgstr ""
+
+#: app/templates/main/index.html:20
+msgid "Manage your queues"
+msgstr ""
+
+#: app/templates/main/index.html:29
+msgid "Swap members"
+msgstr ""
+
+#: app/templates/main/index.html:30
+msgid "Remove members"
+msgstr ""
+
+#: app/templates/main/index.html:31
+msgid "Clear the queue"
+msgstr ""
+
+#: app/templates/main/index.html:32
+msgid "Lock and unlock"
+msgstr ""
+
+#: app/templates/main/index.html:38
+msgid "Add scheduled tasks"
+msgstr ""
+
+#: app/templates/main/index.html:46
+msgid "Choose time, date and action"
+msgstr ""
+
+#: app/templates/main/index.html:53
+msgid "Remember queues"
+msgstr ""
+
+#: app/templates/queue/create_queue.html:7
+msgid "Create queue"
+msgstr ""
+
+#: app/templates/queue/manage_queue.html:71
+#: app/templates/queue/manage_queue.html:95
 msgid "Clear"
 msgstr ""
 
-#: app/templates/queue/manage_queue.html:40
+#: app/templates/queue/manage_queue.html:72
+#: app/templates/queue/manage_queue.html:93
 msgid "Close"
 msgstr ""
 
-#: app/templates/queue/manage_queue.html:45
+#: app/templates/queue/manage_queue.html:73
+#: app/templates/queue/manage_queue.html:94
 msgid "Open"
 msgstr ""
 
-#: app/templates/queue/manage_queue.html:51
+#: app/templates/queue/manage_queue.html:74
+msgid "Tasks"
+msgstr ""
+
+#: app/templates/queue/manage_queue.html:75
 msgid "Spam"
+msgstr ""
+
+#: app/templates/queue/manage_queue.html:105
+msgid "Add task"
+msgstr ""
+
+#: app/templates/queue/manage_queue.html:112
+msgid "Task"
+msgstr ""
+
+#: app/templates/queue/manage_queue.html:113
+msgid "Time"
 msgstr ""
 
 #: app/templates/queue/my_queues.html:6
@@ -249,15 +312,19 @@ msgstr ""
 msgid "This action cannot be undone."
 msgstr ""
 
-#: app/templates/queue/queue.html:40
-msgid "Link has been copied"
+#: app/templates/queue/queue.html:63
+msgid "Next clearing"
 msgstr ""
 
-#: app/templates/queue/queue.html:41
-msgid "Link"
+#: app/templates/queue/queue.html:69
+msgid "Next closing"
 msgstr ""
 
-#: app/templates/queue/queue.html:77
+#: app/templates/queue/queue.html:75
+msgid "Next opening"
+msgstr ""
+
+#: app/templates/queue/queue.html:104
 msgid "Leave"
 msgstr ""
 

@@ -4,8 +4,8 @@
 {% block app_content %}
     <div class="row">
         <div class="col-md-8 col-lg-6">
-            <div class="d-flex align-items-center mt-5 me-5">
-                <h1 class="mb-0">
+            <div class="d-flex align-items-center flex-wrap mt-5 me-5">
+                <h1 class="mb-0 text-nowrap me-5">
                     {{ queue.name }}
                     <span class="h3 text-info align-self-start">
                     {% if queue.is_open %}
@@ -16,11 +16,17 @@
                     {% endif %}
                 </h1>
 
-                <div class="btn-group ms-5">
+                <div class="btn-group mt-2">
                     <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
                             data-bs-target="#share_features" aria-expanded="false"
                             aria-controls="share_features">
                         <i class="bi bi-share"></i>
+                    </button>
+
+                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#info" aria-expanded="false"
+                            aria-controls="info">
+                        <i class="bi bi-info-lg"></i>
                     </button>
 
                     {% if current_user == queue.admin %}
@@ -46,6 +52,31 @@
                                  src="{{ qrcode(url_for('queue.queue', queue_id=queue.id, _external=True), border=2, error_correction='H') }}"
                                  alt="qrcode1">
                         </div>
+                    </div>
+                </div>
+
+                <div class="collapse" id="info">
+                    <div class="p-3 border rounded-2 mb-3">
+                        <table class="table table-bordered m-0">
+                            {% if queue.next_clearing() %}
+                                <tr>
+                                    <td>{{ _('Next clearing') }}</td>
+                                    <td>{{ moment(queue.next_clearing().execute_time).calendar() }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if queue.next_closing() %}
+                                <tr>
+                                    <td>{{ _('Next closing') }}</td>
+                                    <td>{{ moment(queue.next_closing().execute_time).calendar() }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if queue.next_opening() %}
+                                <tr>
+                                    <td>{{ _('Next opening') }}</td>
+                                    <td>{{ moment(queue.next_opening().execute_time).calendar() }}</td>
+                                </tr>
+                            {% endif %}
+                        </table>
                     </div>
                 </div>
 
