@@ -3,7 +3,7 @@ cur_theme = document.cookie.split("; ")
     .find((row) => row.startsWith("theme="))
     ?.split("=")[1];
 
-if (cur_theme === undefined) {
+if (cur_theme === undefined || cur_theme === 'undefined') {
     document.cookie = `theme=dark;path=/;`
     cur_theme = 'dark'
 }
