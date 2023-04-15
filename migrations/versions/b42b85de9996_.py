@@ -29,7 +29,7 @@ def upgrade():
     sa.Column('email', sa.String(length=120), nullable=True),
     sa.Column('password_hash', sa.String(length=128), nullable=True),
     sa.Column('is_guest', sa.Boolean(), nullable=True),
-    sa.Column('ip_address', sa.String(), nullable=True),
+    sa.Column('ip_address', sa.String(length=30), nullable=True),
     sa.Column('name_to_print', sa.String(length=30), nullable=True),
     sa.Column('is_confirmed', sa.Boolean(), nullable=False),
     sa.Column('confirmed_on', sa.DateTime(), nullable=True),
