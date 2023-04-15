@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-14 14:25+0300\n"
+"POT-Creation-Date: 2023-04-15 20:10+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -111,7 +111,7 @@ msgstr "Войти под именем"
 
 #: app/queue/forms.py:14
 msgid "Join"
-msgstr "Найти очередь"
+msgstr "Войти"
 
 #: app/queue/forms.py:18 app/queue/forms.py:23 app/queue/forms.py:28
 msgid "Queue ID"

@@ -1,4 +1,4 @@
-from flask import Flask, request, current_app
+from flask import Flask
 from app.config import Config
 from app.extensions import db, login, migrate, bootstrap, mail, moment, babel, qrcode
 from app.utils import get_locale
@@ -38,6 +38,7 @@ def create_app(config_obj=Config()):
 
     login.login_view = 'auth.login'
     login.login_message = _l('Please login to access this page')
+    login.session_protection = "strong"
 
     app.app_context().push()
 
