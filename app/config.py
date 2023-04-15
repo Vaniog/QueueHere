@@ -19,6 +19,7 @@ class Config:
     SQLALCHEMY_ENGINE_OPTIONS = {'pool_recycle': 280, 'pool_pre_ping': True}
     SESSION_COOKIE_NAME = "queue_session"
     SESSION_TYPE = 'filesystem'
+    SESSION_FILE_DIR = os.path.join(basedir, 'sessions')
     SECURITY_PASSWORD_SALT = os.environ.get('SECURITY_PASSWORD_SALT') or \
                              'very-important'
 

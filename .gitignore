@@ -7,3 +7,4 @@ cache
 gunicorn.log
 app/.env
 scripts/
+sessions
