@@ -50,7 +50,7 @@ def register():
         db.session.commit()
 
         token = generate_token(new_user.email)
-        confirm_url = url_for("auth.confirm_email", user_id=current_user.id, token=token, _external=True)
+        confirm_url = url_for("auth.confirm_email", user_id=new_user.id, token=token, _external=True)
         html = render_template("auth/confirm_email.html", confirm_url=confirm_url)
         subject = "Please confirm your email"
         send_email(new_user.email, subject, html)
