@@ -20,6 +20,7 @@ class Config:
     SESSION_COOKIE_NAME = "queue_session"
     SESSION_TYPE = 'filesystem'
     SESSION_FILE_DIR = os.path.join(basedir, 'sessions')
+    SESSION_REFRESH_EACH_REQUEST = True
     SECURITY_PASSWORD_SALT = os.environ.get('SECURITY_PASSWORD_SALT') or \
                              'very-important'
 
