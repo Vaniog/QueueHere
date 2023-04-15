@@ -1,6 +1,6 @@
 from flask import Flask
 from app.config import Config
-from app.extensions import db, login, migrate, bootstrap, mail, moment, babel, qrcode
+from app.extensions import db, login, migrate, bootstrap, mail, moment, babel, qrcode, csrf
 from app.utils import get_locale
 import logging
 from logging.handlers import RotatingFileHandler
@@ -21,6 +21,7 @@ def create_app(config_obj=Config()):
     moment.init_app(app)
     babel.init_app(app, locale_selector=get_locale)
     qrcode.init_app(app)
+    csrf.init_app(app)
 
     app.jinja_env.globals.update(get_locale=get_locale)
 

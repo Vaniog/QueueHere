@@ -6,6 +6,7 @@ from flask_mail import Mail
 from flask_moment import Moment
 from flask_babel import Babel
 from flask_qrcode import QRcode
+from flask_wtf import CSRFProtect
 
 login = LoginManager()
 db = SQLAlchemy()
@@ -15,3 +16,4 @@ mail = Mail()
 moment = Moment()
 babel = Babel()
 qrcode = QRcode()
+csrf = CSRFProtect()
