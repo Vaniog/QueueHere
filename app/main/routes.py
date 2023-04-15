@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, current_app, request, session
 from flask_login import current_user
 from app.extensions import db, babel
 from app.queue.forms import FindQueueForm
@@ -16,6 +16,7 @@ def index():
 
 @bp.before_app_request
 def before_request():
+    current_app.logger.info("{}: {}".format(request.remote_addr, session))
     if current_user is not None and current_user.is_authenticated:
         db.session.commit()
 
