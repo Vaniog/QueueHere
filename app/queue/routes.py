@@ -124,7 +124,8 @@ def manage_queue(queue_id):
 def spam_queue(queue_id):
     cur_queue = Queue.query.filter_by(id=queue_id).first_or_404()
     for i in range(2, 7):
-        cur_queue.add_member(User.query.filter_by(id=i).first(), str(i))
+        spamer = User.query.filter_by(id=i).first()
+        cur_queue.add_member(spamer, spamer.username)
     db.session.commit()
     return redirect(url_for('queue.manage_queue', queue_id=queue_id))
 
