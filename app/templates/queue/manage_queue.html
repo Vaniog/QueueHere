@@ -146,6 +146,7 @@
 {% block app_scripts %}
     <script type="text/javascript">
         queue_id = '{{ queue.id }}';
+        csrf_token = '{{ csrf_token() }}'
 
 
         function UpdateServer() {
@@ -159,9 +160,12 @@
 
             fetch('{{ url_for('queue.new_order') }}', {
                 method: 'POST',
+                headers: {
+                    "X-CSRFToken": csrf_token,
+                },
                 body: JSON.stringify({
                     queue_id: queue_id,
-                    new_order: new_order
+                    new_order: new_order,
                 })
             })
                 .then((response) => {
@@ -250,8 +254,11 @@
 
             fetch(url, {
                 method: 'POST',
+                headers: {
+                    "X-CSRFToken": csrf_token,
+                },
                 body: JSON.stringify({
-                    queue_id: queue_id,
+                    queue_id: queue_id
                 })
             })
                 .then((response) => {
@@ -275,6 +282,9 @@
         function UpdateTasks() {
             fetch("{{ url_for('queue.get_queue_tasks', queue_id=queue.id) }}", {
                 method: 'GET',
+                headers: {
+                    "X-CSRFToken": csrf_token,
+                },
             })
                 .then((response) => {
                     if (response.ok)
@@ -312,8 +322,11 @@
                         task_remove.addEventListener('click', (elem) => {
                             fetch('{{ url_for('queue.delete_queue_task') }}', {
                                 method: 'POST',
+                                headers: {
+                                    "X-CSRFToken": csrf_token,
+                                },
                                 body: JSON.stringify({
-                                    task_id: task.task_id
+                                    task_id: task.task_id,
                                 })
                             })
                                 .then((response) => {
@@ -347,11 +360,14 @@
 
             fetch("{{ url_for('queue.add_task') }}", {
                 method: 'POST',
+                headers: {
+                    "X-CSRFToken": csrf_token,
+                },
                 body: JSON.stringify({
                     queue_id: queue_id,
                     task_action: document.getElementById('task-action-input').value,
                     task_time: moment(document.getElementById('task-date-input').value)
-                        .utc().format("YYYY-MM-DD HH:mm:ss"),
+                        .utc().format("YYYY-MM-DD HH:mm:ss")
                 })
             })
                 .then((response) => {

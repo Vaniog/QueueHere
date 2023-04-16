@@ -109,12 +109,17 @@
 
 {% block app_scripts %}
     <script type="text/javascript">
+        csrf_token = '{{ csrf_token() }}'
+
         forget_btns = document.querySelectorAll('#forget-queue-btn')
         forget_btns.forEach((element) => {
             let queue_id = element.getAttribute('data-queue')
             element.addEventListener('click', () => {
                 fetch('{{ url_for('queue.forget_queue') }}', {
                     method: 'POST',
+                    headers: {
+                        "X-CSRFToken": csrf_token,
+                    },
                     body: JSON.stringify({
                         queue_id: queue_id
                     })
@@ -140,6 +145,9 @@
             element.addEventListener('click', () => {
                 fetch('{{ url_for('queue.kill_queue') }}', {
                     method: 'POST',
+                    headers: {
+                        "X-CSRFToken": csrf_token,
+                    },
                     body: JSON.stringify({
                         queue_id: queue_id
                     })

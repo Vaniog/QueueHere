@@ -16,7 +16,6 @@ def index():
 
 @bp.before_app_request
 def before_request():
-    current_app.logger.info("{}: {}".format(request.remote_addr, session))
     if current_user is not None and current_user.is_authenticated:
         db.session.commit()
 
@@ -26,6 +25,8 @@ def add_header(response):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "0"
-    response.headers['Cache-Control'] = 'public, max-age=0'
+    response.cache_control.public = True
+    response.cache_control.max_age = 0
+    # current_app.logger.info("{}: {}".format(request.remote_addr, session))
 
     return response
