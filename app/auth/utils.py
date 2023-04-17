@@ -7,7 +7,8 @@ from flask_login import current_user
 
 
 def cur_user_or_temp():
-    if current_user.is_authenticated:
+    current_app.logger.info("Cur user:", current_user)
+    if not current_user.is_anonymous:
         return current_user
     temp_user = User()
     temp_user.set_ip_address(request.remote_addr)
