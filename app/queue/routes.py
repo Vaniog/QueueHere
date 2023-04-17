@@ -15,6 +15,7 @@ def queue(queue_id):
     cur_queue = Queue.query.filter_by(id=queue_id).first_or_404()
     join_form = JoinQueueForm()
 
+    current_app.logger.info("Queue asked")
     cur_user = cur_user_or_temp()
 
     if join_form.validate_on_submit():
