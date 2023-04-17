@@ -11,7 +11,13 @@ def cur_user_or_temp():
     if not current_user.is_anonymous:
         return current_user
     temp_user = User()
-    temp_user.set_ip_address(request.remote_addr)
+
+    if request.headers.getlist("X-Forwarded-For"):
+        ip = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        ip = request.remote_addr
+
+    temp_user.set_ip_address(ip)
 
     current_app.logger.info("Remote addr: {}".format(request.remote_addr))
     current_app.logger.info("New ip: {}".format(temp_user.ip_address))
