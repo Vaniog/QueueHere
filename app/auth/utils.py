@@ -12,6 +12,7 @@ def cur_user_or_temp():
     temp_user = User()
     temp_user.set_ip_address(request.remote_addr)
 
+    current_app.logger.info("Remote addr:", request.remote_addr)
     current_app.logger.info("New ip:", temp_user.ip_address)
 
     maybe_user = User.query.filter_by(ip_address=temp_user.ip_address).first()
