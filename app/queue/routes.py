@@ -17,7 +17,7 @@ def queue(queue_id):
 
     current_app.logger.info("Queue asked")
     cur_user = cur_user_or_temp()
-    current_app.logger.info("Get temp user:", cur_user)
+    current_app.logger.info("Get temp user: {}".format(cur_user))
 
     if join_form.validate_on_submit():
         if not cur_queue.is_open:
