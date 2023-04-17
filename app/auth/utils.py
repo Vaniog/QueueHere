@@ -7,7 +7,6 @@ from flask_login import current_user
 
 
 def cur_user_or_temp():
-    current_app.logger.info("Cur user: {}".format(current_user))
     if not current_user.is_anonymous:
         return current_user
     temp_user = User()
@@ -20,9 +19,6 @@ def cur_user_or_temp():
     ip += request.headers.get('User-Agent')
 
     temp_user.set_ip_address(ip)
-
-    current_app.logger.info("Remote addr: {}".format(request.remote_addr))
-    current_app.logger.info("New ip: {}".format(temp_user.ip_address))
 
     maybe_user = User.query.filter_by(ip_address=temp_user.ip_address).first()
 
