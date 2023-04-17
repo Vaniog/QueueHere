@@ -17,6 +17,8 @@ def cur_user_or_temp():
     else:
         ip = request.remote_addr
 
+    ip += request.headers.get('User-Agent')
+
     temp_user.set_ip_address(ip)
 
     current_app.logger.info("Remote addr: {}".format(request.remote_addr))
