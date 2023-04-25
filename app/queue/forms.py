@@ -5,12 +5,12 @@ from flask_babel import lazy_gettext as _l
 
 
 class CreateQueueForm(FlaskForm):
-    name = StringField(_l('Name'), validators=[DataRequired()])
+    name = StringField(_l('Name'), validators=[DataRequired(), Length(max=100)])
     submit = SubmitField(_l('Create'))
 
 
 class JoinQueueForm(FlaskForm):
-    name_to_print = StringField(_l('Join with name'), validators=[DataRequired()])
+    name_to_print = StringField(_l('Join with name'), validators=[DataRequired(), Length(max=30)])
     submit = SubmitField(_l('Join'))
 
 
