@@ -27,6 +27,7 @@ def add_header(response):
     response.headers["Expires"] = "0"
     response.cache_control.public = True
     response.cache_control.max_age = 0
+    session.permanent = True
     # current_app.logger.info("{}: {}".format(request.remote_addr, session))
 
     return response
