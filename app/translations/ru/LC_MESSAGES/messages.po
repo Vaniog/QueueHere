@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-15 20:10+0300\n"
+"POT-Creation-Date: 2023-05-04 23:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/__init__.py:40
+#: app/__init__.py:42
 msgid "Please login to access this page"
 msgstr "Пожалуйста войдите в аккаунт, чтобы получить доступ к данной странице"
 
@@ -27,48 +27,44 @@ msgstr "Пожалуйста войдите в аккаунт, чтобы пол
 msgid "Please confirm your account!"
 msgstr "Пожалуйста, подтвердите свой аккаунт!"
 
-#: app/auth/forms.py:9 app/auth/forms.py:16
+#: app/auth/forms.py:9 app/auth/forms.py:15
 msgid "Username"
 msgstr "Логин"
 
-#: app/auth/forms.py:10 app/auth/forms.py:18
+#: app/auth/forms.py:10 app/auth/forms.py:17
 msgid "Password"
 msgstr "Пароль"
 
-#: app/auth/forms.py:11
-msgid "Remember Me"
-msgstr "Запомнить меня"
-
-#: app/auth/forms.py:12 app/templates/auth/login.html:7
+#: app/auth/forms.py:11 app/templates/auth/login.html:7
 msgid "Sign In"
 msgstr "Вход"
 
-#: app/auth/forms.py:17
+#: app/auth/forms.py:16
 msgid "Email"
 msgstr "Email"
 
-#: app/auth/forms.py:20
+#: app/auth/forms.py:19
 msgid "Repeat Password"
 msgstr "Повторите пароль"
 
-#: app/auth/forms.py:21 app/templates/auth/register.html:7
+#: app/auth/forms.py:20 app/templates/auth/register.html:7
 #: app/templates/base.html:75
 msgid "Register"
 msgstr "Регистрация"
 
-#: app/auth/forms.py:26
+#: app/auth/forms.py:25
 msgid "This address is already in use."
 msgstr "Этот адрес уже используется"
 
-#: app/auth/forms.py:31
+#: app/auth/forms.py:30
 msgid "This username is already in use."
 msgstr "Этот логин уже используется"
 
-#: app/auth/routes.py:21
+#: app/auth/routes.py:22
 msgid "Invalid user or password"
 msgstr "Неверный логин или пароль"
 
-#: app/auth/routes.py:60
+#: app/auth/routes.py:61
 msgid ""
 "Congratulations, you are now a registered user! Check your email for "
 "verification."
@@ -77,23 +73,23 @@ msgstr ""
 "аккаунта. Проверьте спам. Если вы используете Яндекс почту, для открытия "
 "ссылки из письма, надо подтвердить что письмо не спам."
 
-#: app/auth/routes.py:77
+#: app/auth/routes.py:78
 msgid "Your account has already been confirmed."
 msgstr "Ваш аккаунт уже подтвержден"
 
-#: app/auth/routes.py:86
+#: app/auth/routes.py:87
 msgid "A new confirmation email has been sent."
 msgstr "Новое письмо с подтверждением было отправлено"
 
-#: app/auth/routes.py:94
+#: app/auth/routes.py:95
 msgid "Account already confirmed."
 msgstr "Аккаунт уже подтвержден"
 
-#: app/auth/routes.py:102
+#: app/auth/routes.py:104
 msgid "You have confirmed your account. Thanks!"
 msgstr "Вы подтвердили свой аккаунт! Спасибо!"
 
-#: app/auth/routes.py:104
+#: app/auth/routes.py:106
 msgid "The confirmation link is invalid or has expired."
 msgstr "Ссылка подверждения неверная или истекла"
 
@@ -145,7 +141,7 @@ msgstr "Вы не можете создать больше чем %(max_queues) 
 msgid "New"
 msgstr "Создать"
 
-#: app/templates/base.html:59
+#: app/templates/base.html:59 app/templates/base.html:134
 msgid "Queues"
 msgstr "Очереди"
 
@@ -156,6 +152,18 @@ msgstr "Выйти"
 #: app/templates/base.html:71
 msgid "Login"
 msgstr "Войти"
+
+#: app/templates/base.html:117
+msgid "Stats"
+msgstr "Статистика"
+
+#: app/templates/base.html:133
+msgid "Users"
+msgstr "Пользователи"
+
+#: app/templates/base.html:135
+msgid "Queues entries"
+msgstr "Входов в очередь"
 
 #: app/templates/auth/confirm_email.html:7
 msgid ""
@@ -360,4 +368,7 @@ msgstr "Выйти"
 
 #~ msgid "Time"
 #~ msgstr "Время"
+
+#~ msgid "Remember Me"
+#~ msgstr "Запомнить меня"
 
