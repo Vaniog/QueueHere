@@ -96,6 +96,8 @@ class Queue(db.Model):
             was_user.name_printed = name_printed
             was_user.index_in_queue = self.last_index
             was_user.is_visible = True
+            if (datetime.utcnow() - was_user.arrive_time).total_seconds() / 60 >= 5:
+                Stats.increase(StatsEnum.queues_entries)
             was_user.update_arrive_time()
             return
         uq = UserQueue(name_printed=name_printed,
@@ -154,3 +156,6 @@ class QueueTask(db.Model):
             self.queue.close()
         elif self.action == TaskEnum.open:
             self.queue.open()
+
+
+from app.main.models import Stats, StatsEnum

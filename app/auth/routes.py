@@ -7,6 +7,7 @@ from app.auth.utils import generate_token, confirm_token, send_email
 from app.auth.models import User
 from app.auth.forms import LoginForm, RegistrationForm
 from app.extensions import db
+from app.main.models import Stats, StatsEnum
 from datetime import datetime
 
 
@@ -98,6 +99,7 @@ def confirm_email(user_id, token):
         user.is_confirmed = True
         user.confirmed_on = datetime.now()
         db.session.add(user)
+        Stats.increase(StatsEnum.users_registered)
         db.session.commit()
         flash(_("You have confirmed your account. Thanks!"), "success")
     else:

@@ -26,7 +26,7 @@
     {% block app_link %}
     {% endblock %}
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <nav class="navbar navbar-expand-sm text-bg-primary nav-pills">
     <div class="container-fluid">
         <a href="{{ url_for('main.index') }}" class="navbar-brand text-bg-primary d-flex align-items-end">
@@ -84,7 +84,7 @@
 </nav>
 
 
-<div class="container">
+<div class="container d-flex flex-column">
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class="row">
@@ -104,8 +104,41 @@
     {% endwith %}
 
     {% block app_content %}{% endblock %}
+
 </div>
 
+
+<div class="mt-auto navbar navbar-expand-sm bg-opacity-50 text-bg-primary nav-pills shadow p-0 w-100">
+    <div class="w-100 m-0">
+        <div class="row w-100 m-0 p-2">
+            <div class="col ms-auto text-start p-0">
+                <button class="btn btn-outline-primary text-light" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#statsCollapse" aria-expanded="false" aria-controls="statsCollapse">Stats
+                </button>
+            </div>
+
+            <div class="col text-end p-0">
+                <a href="#" class="btn btn-primary" id="like-btn">
+                    {% if current_user.like_given %} <i class="bi bi-heart-fill"></i>
+                    {% else %} <i class="bi bi-heart"></i>
+                    {% endif %}
+                    <span>{{ Stats.get_count_of(StatsEnum.likes_given) }}</span>
+                </a>
+                <a href="https://github.com/Vaniog/QueueHere" class="btn btn-secondary"><i class="bi bi-github"></i></a>
+            </div>
+            <div class="col-12 p-0">
+                <div class="collapse mt-1" id="statsCollapse">
+                    <div class="d-flex flex-column m-0">
+                        <p class="mb-0">{{ _('Users') }}: {{ Stats.get_count_of(StatsEnum.users_registered) }}</p>
+                        <p class="mb-0">{{ _('Queues') }}: {{ Stats.get_count_of(StatsEnum.queues_created) }}</p>
+                        <p class="mb-0">{{ _('Queues entries') }}: {{ Stats.get_count_of(StatsEnum.queues_entries) }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
@@ -116,6 +149,36 @@
 {% block app_scripts %}{% endblock %}
 
 <script type="text/javascript" src="{{ url_for('static', filename= 'js/base.js') }}">
+</script>
+
+<script type="text/javascript">
+    csrf_token = '{{ csrf_token() }}'
+
+    like_btn = document.getElementById('like-btn')
+
+    like_btn.addEventListener('click', () => {
+        fetch("{{ url_for('main.give_like') }}", {
+            method: 'POST',
+            headers: {
+                "X-CSRFToken": csrf_token,
+            },
+            body: JSON.stringify({})
+        })
+            .then((response) => {
+                if (response.ok)
+                    return response.json()
+                throw new Error()
+            })
+            .then((result) => {
+                console.log(like_btn.querySelector('i').classList)
+                like_btn.querySelector('i').classList.remove('bi-heart')
+                like_btn.querySelector('i').classList.add('bi-heart-fill')
+                like_btn.querySelector('span').innerText = result["likes_amount"]
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    })
 </script>
 </body>
 </html>

@@ -2,6 +2,7 @@ from flask import Flask
 from app.config import Config
 from app.extensions import db, login, migrate, bootstrap, mail, moment, babel, qrcode, csrf
 from app.utils import get_locale
+from app.main.models import Stats, StatsEnum
 import logging
 from logging.handlers import RotatingFileHandler
 import os
@@ -59,6 +60,11 @@ def create_app(config_obj=Config()):
 
     bot_thread = TaskBotThread(app)
     bot_thread.start()
+
+    @app.context_processor
+    def inject_stage_and_region():
+        return dict(Stats=Stats,
+                    StatsEnum=StatsEnum)
 
     return app
 

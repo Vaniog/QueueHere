@@ -23,6 +23,8 @@ class User(UserMixin, db.Model):
 
     is_admin = db.Column(db.Boolean, default=False, nullable=False)
 
+    like_given = db.Column(db.Boolean, default=False, nullable=False)
+
     def __repr__(self):
         return '<User {}>'.format(self.username)
 

@@ -4,7 +4,7 @@ from flask_babel import _
 from app.queue.models import Queue, UserQueue, QueueTask, TaskEnum
 from app.auth.models import User
 from app.auth.utils import cur_user_or_temp
-from app.auth.decorators import check_is_confirmed, check_is_admin
+from app.auth.decorators import check_is_confirmed
 from app.extensions import db
 from app.queue.forms import CreateQueueForm, JoinQueueForm, KillQueueForm, ForgetQueueForm
 from app.queue import bp
