@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-05-04 23:21+0300\n"
+"POT-Creation-Date: 2023-05-05 03:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -31,7 +31,7 @@ msgstr "Пожалуйста, подтвердите свой аккаунт!"
 msgid "Username"
 msgstr "Логин"
 
-#: app/auth/forms.py:10 app/auth/forms.py:17
+#: app/auth/forms.py:10 app/auth/forms.py:17 app/auth/forms.py:39
 msgid "Password"
 msgstr "Пароль"
 
@@ -39,11 +39,11 @@ msgstr "Пароль"
 msgid "Sign In"
 msgstr "Вход"
 
-#: app/auth/forms.py:16
+#: app/auth/forms.py:16 app/auth/forms.py:34
 msgid "Email"
 msgstr "Email"
 
-#: app/auth/forms.py:19
+#: app/auth/forms.py:19 app/auth/forms.py:41
 msgid "Repeat Password"
 msgstr "Повторите пароль"
 
@@ -60,11 +60,19 @@ msgstr "Этот адрес уже используется"
 msgid "This username is already in use."
 msgstr "Этот логин уже используется"
 
-#: app/auth/routes.py:22
+#: app/auth/forms.py:35
+msgid "Request Password Reset"
+msgstr "Запросить изменение пароля"
+
+#: app/auth/forms.py:42
+msgid "Reset Password"
+msgstr "Изменить пароль"
+
+#: app/auth/routes.py:24
 msgid "Invalid user or password"
 msgstr "Неверный логин или пароль"
 
-#: app/auth/routes.py:61
+#: app/auth/routes.py:63
 msgid ""
 "Congratulations, you are now a registered user! Check your email for "
 "verification."
@@ -73,25 +81,37 @@ msgstr ""
 "аккаунта. Проверьте спам. Если вы используете Яндекс почту, для открытия "
 "ссылки из письма, надо подтвердить что письмо не спам."
 
-#: app/auth/routes.py:78
+#: app/auth/routes.py:80
 msgid "Your account has already been confirmed."
 msgstr "Ваш аккаунт уже подтвержден"
 
-#: app/auth/routes.py:87
+#: app/auth/routes.py:89
 msgid "A new confirmation email has been sent."
 msgstr "Новое письмо с подтверждением было отправлено"
 
-#: app/auth/routes.py:95
+#: app/auth/routes.py:97
 msgid "Account already confirmed."
 msgstr "Аккаунт уже подтвержден"
 
-#: app/auth/routes.py:104
+#: app/auth/routes.py:106
 msgid "You have confirmed your account. Thanks!"
 msgstr "Вы подтвердили свой аккаунт! Спасибо!"
 
-#: app/auth/routes.py:106
+#: app/auth/routes.py:108
 msgid "The confirmation link is invalid or has expired."
 msgstr "Ссылка подверждения неверная или истекла"
+
+#: app/auth/routes.py:121
+msgid "Check your email for the instructions to reset your password"
+msgstr "Проверьте вашу почту, вам придет инструкция"
+
+#: app/auth/routes.py:138
+msgid "Your password has been reset."
+msgstr "Ваш пароль был изменен"
+
+#: app/auth/utils.py:81
+msgid "[QueueHere] Reset Your Password"
+msgstr "[QueueHere] Изменение пароля"
 
 #: app/queue/forms.py:8
 msgid "Name"
@@ -141,7 +161,7 @@ msgstr "Вы не можете создать больше чем %(max_queues) 
 msgid "New"
 msgstr "Создать"
 
-#: app/templates/base.html:59 app/templates/base.html:134
+#: app/templates/base.html:59 app/templates/base.html:165
 msgid "Queues"
 msgstr "Очереди"
 
@@ -153,25 +173,51 @@ msgstr "Выйти"
 msgid "Login"
 msgstr "Войти"
 
-#: app/templates/base.html:117
+#: app/templates/base.html:116
+msgid "I updated the site a little bit"
+msgstr "Я немного обновил сайт"
+
+#: app/templates/base.html:123
+msgid ""
+"Now you can log into the account normally and it will not log out for a "
+"long time, if you forget your password, you can reset it"
+msgstr ""
+"Теперь можно нормально войти в аккаунт и он не выйдет в течение "
+"длительного срока, а если забыли пароль, то вы сможете его восстановить"
+
+#: app/templates/base.html:127
+msgid ""
+"Which I advise you to do, because it will automatically fill in the name "
+"when you enter the queue, as well as always be at hand will be a "
+"convenient list of your queues"
+msgstr ""
+" Что я и советую сделать, так как это даст автоматическое заполнение "
+"имени при входе в очередь, а так же под рукой всегда будет удобный список"
+" ваших очередей "
+
+#: app/templates/base.html:131
+msgid ""
+"And now you can support me morally by logging into your account and "
+"clicking on the heart at the bottom of the site"
+msgstr ""
+"А еще теперь вы можете морально меня поддержать, войдя в аккаунт и "
+"кликнув на сердечко внизу сайта "
+
+#: app/templates/base.html:148
 msgid "Stats"
 msgstr "Статистика"
 
-#: app/templates/base.html:133
+#: app/templates/base.html:164
 msgid "Users"
 msgstr "Пользователи"
 
-#: app/templates/base.html:135
+#: app/templates/base.html:166
 msgid "Queues entries"
 msgstr "Входов в очередь"
 
-#: app/templates/auth/confirm_email.html:7
-msgid ""
-"Welcome! Thanks for signing up. Please follow this link to activate your "
-"account:"
-msgstr ""
-"Добро пожаловать! Спасибо за регистрацию. Перейдите по данной ссылки для "
-"активации аккаунта"
+#: app/templates/base.html:192
+msgid "Login and confirm you account"
+msgstr "Войдите и подтвердите аккаунт"
 
 #: app/templates/auth/inactive.html:8
 msgid ""
@@ -199,6 +245,50 @@ msgstr "Новый пользователь?"
 #: app/templates/auth/login.html:11
 msgid "Click to Register!"
 msgstr "Нажмите для регистрации!"
+
+#: app/templates/auth/login.html:14
+msgid "Forget Password or Username?"
+msgstr "Забыли пароль или логин?"
+
+#: app/templates/auth/login.html:15 app/templates/auth/reset_password.html:7
+msgid "Reset password"
+msgstr "Изменить пароль"
+
+#: app/templates/auth/reset_password_request.html:7
+msgid "Request password reset"
+msgstr "Запросить изменение пароля"
+
+#: app/templates/auth/email/confirm_email.html:7
+msgid ""
+"Welcome! Thanks for signing up. Please follow this link to activate your "
+"account:"
+msgstr ""
+"Добро пожаловать! Спасибо за регистрацию. Перейдите по данной ссылки для "
+"активации аккаунта"
+
+#: app/templates/auth/email/reset_password.html:1
+msgid "Hello!"
+msgstr "Здравствуйте!"
+
+#: app/templates/auth/email/reset_password.html:2
+msgid "Your username is"
+msgstr "Ваш логин"
+
+#: app/templates/auth/email/reset_password.html:4
+msgid "To reset password"
+msgstr "Чтобы изменить пароль"
+
+#: app/templates/auth/email/reset_password.html:6
+msgid "click this link"
+msgstr "кликните по этой ссылке"
+
+#: app/templates/auth/email/reset_password.html:9
+msgid "Or paste it to browser address line"
+msgstr "Или вставьте ее в адресную строку браузера"
+
+#: app/templates/auth/email/reset_password.html:11
+msgid "Ignore this message, if you didnt ask for it"
+msgstr "Игнорируйте данное сообщение, если вы не запрашивали его"
 
 #: app/templates/errors/404.html:4
 msgid "Wrong address"

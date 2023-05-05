@@ -7,7 +7,7 @@ from flask_babel import _
 def check_is_confirmed(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
-        if not current_user.is_confirmed:
+        if current_user.is_anonymous or not current_user.is_confirmed:
             flash(_("Please confirm your account!"), "warning")
             return redirect(url_for("auth.inactive"))
         return func(*args, **kwargs)

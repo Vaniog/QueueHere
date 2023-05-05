@@ -84,7 +84,7 @@
 </nav>
 
 
-<div class="container d-flex flex-column">
+<div class="container d-flex flex-column mb-4">
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class="row">
@@ -105,6 +105,37 @@
 
     {% block app_content %}{% endblock %}
 
+</div>
+
+<div id="version-popup" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-arrow-repeat"></i>
+                    {{ _('I updated the site a little bit') }}
+                </h5>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <i class="bi bi-check-circle"></i>
+
+                    {{ _('Now you can log into the account normally and it will not log out for a long time, if you forget your password, you can reset it') }}
+                </p>
+                <p>
+                    <i class="bi bi-list-task"></i>
+                    {{ _('Which I advise you to do, because it will automatically fill in the name when you enter the queue, as well as always be at hand will be a convenient list of your queues') }}
+                </p>
+                <p>
+                    <i class="bi bi-heart-fill"></i>
+                    {{ _('And now you can support me morally by logging into your account and clicking on the heart at the bottom of the site') }}
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="update-ok-btn" class="btn btn-primary" data-bs-dismiss="modal">Понял!</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -157,6 +188,13 @@
 
     like_btn = document.getElementById('like-btn')
 
+    const my_popover = new bootstrap.Popover(document.getElementById('like-btn'), {
+        content: "{{ _('Login and confirm you account') }}",
+        placement: 'top',
+        trigger: 'manual'
+    });
+
+    var anim_id = 1
     like_btn.addEventListener('click', () => {
         fetch("{{ url_for('main.give_like') }}", {
             method: 'POST',
@@ -177,6 +215,13 @@
                 like_btn.querySelector('span').innerText = result["likes_amount"]
             })
             .catch((error) => {
+                my_popover.show()
+                anim_id = Math.random()
+                let anim_id_cur = anim_id
+                setTimeout(() => {
+                    if (anim_id === anim_id_cur)
+                        my_popover.hide()
+                }, 2000)
                 console.log(error)
             })
     })

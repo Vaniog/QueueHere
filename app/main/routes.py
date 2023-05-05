@@ -18,9 +18,9 @@ def index():
 
 
 @bp.route('/give_like', methods=['POST'])
-@login_required
-@check_is_confirmed
 def give_like():
+    if current_user.is_anonymous or not current_user.is_confirmed:
+        return {}, 401
     if not current_user.like_given:
         current_user.like_given = True
         Stats.increase(StatsEnum.likes_given)

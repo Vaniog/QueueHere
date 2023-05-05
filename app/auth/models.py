@@ -1,6 +1,8 @@
 from flask_login import UserMixin
+from flask import current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.extensions import db, login
+from itsdangerous import URLSafeTimedSerializer
 
 from hashlib import sha1
 from hashlib import md5
@@ -48,6 +50,19 @@ class User(UserMixin, db.Model):
 
     def check_ip_address(self, ip_address):
         return self.ip_address == self.generate_ip_hash(ip_address)
+
+    def generate_reset_password_token(self):
+        serializer = URLSafeTimedSerializer(current_app.config["SECRET_KEY"])
+        return serializer.dumps(self.id, salt=current_app.config["SECURITY_PASSWORD_SALT"])
+
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            serializer = URLSafeTimedSerializer(current_app.config["SECRET_KEY"])
+            user_id = serializer.loads(token, salt=current_app.config["SECURITY_PASSWORD_SALT"])
+        except:
+            return
+        return User.query.get(user_id)
 
 
 @login.user_loader

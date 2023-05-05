@@ -7,3 +7,15 @@ theme_btn.addEventListener('click', () => {
     else
         SetTheme('dark')
 })
+
+
+cur_version = getCookie('version')
+
+if (cur_version < 1.0 || cur_version === null) {
+    var modal = new bootstrap.Modal(document.getElementById('version-popup'))
+    modal.show()
+}
+
+document.getElementById('update-ok-btn').addEventListener('click', () => {
+    setCookie('version', 1.0)
+})
