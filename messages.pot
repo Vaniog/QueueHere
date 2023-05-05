@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-05-05 03:09+0300\n"
+"POT-Creation-Date: 2023-05-05 14:33+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -156,7 +156,7 @@ msgstr ""
 msgid "New"
 msgstr ""
 
-#: app/templates/base.html:59 app/templates/base.html:165
+#: app/templates/base.html:59 app/templates/base.html:170
 msgid "Queues"
 msgstr ""
 
@@ -191,19 +191,23 @@ msgid ""
 "clicking on the heart at the bottom of the site"
 msgstr ""
 
-#: app/templates/base.html:148
+#: app/templates/base.html:136
+msgid "Sure"
+msgstr ""
+
+#: app/templates/base.html:150
 msgid "Stats"
 msgstr ""
 
-#: app/templates/base.html:164
+#: app/templates/base.html:169
 msgid "Users"
 msgstr ""
 
-#: app/templates/base.html:166
+#: app/templates/base.html:171
 msgid "Queues entries"
 msgstr ""
 
-#: app/templates/base.html:192
+#: app/templates/base.html:197
 msgid "Login and confirm you account"
 msgstr ""
 

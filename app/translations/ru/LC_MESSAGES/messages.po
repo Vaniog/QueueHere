@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-05-05 03:09+0300\n"
+"POT-Creation-Date: 2023-05-05 14:33+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -161,7 +161,7 @@ msgstr "Вы не можете создать больше чем %(max_queues) 
 msgid "New"
 msgstr "Создать"
 
-#: app/templates/base.html:59 app/templates/base.html:165
+#: app/templates/base.html:59 app/templates/base.html:170
 msgid "Queues"
 msgstr "Очереди"
 
@@ -203,19 +203,23 @@ msgstr ""
 "А еще теперь вы можете морально меня поддержать, войдя в аккаунт и "
 "кликнув на сердечко внизу сайта "
 
-#: app/templates/base.html:148
+#: app/templates/base.html:136
+msgid "Sure"
+msgstr "Понял"
+
+#: app/templates/base.html:150
 msgid "Stats"
 msgstr "Статистика"
 
-#: app/templates/base.html:164
+#: app/templates/base.html:169
 msgid "Users"
 msgstr "Пользователи"
 
-#: app/templates/base.html:166
+#: app/templates/base.html:171
 msgid "Queues entries"
 msgstr "Входов в очередь"
 
-#: app/templates/base.html:192
+#: app/templates/base.html:197
 msgid "Login and confirm you account"
 msgstr "Войдите и подтвердите аккаунт"
 
