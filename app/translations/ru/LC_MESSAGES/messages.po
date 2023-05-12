@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-05-05 14:33+0300\n"
+"POT-Creation-Date: 2023-05-12 21:45+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,280 +19,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/__init__.py:42
-msgid "Please login to access this page"
-msgstr "Пожалуйста войдите в аккаунт, чтобы получить доступ к данной странице"
-
-#: app/auth/decorators.py:11
-msgid "Please confirm your account!"
-msgstr "Пожалуйста, подтвердите свой аккаунт!"
-
-#: app/auth/forms.py:9 app/auth/forms.py:15
-msgid "Username"
-msgstr "Логин"
-
-#: app/auth/forms.py:10 app/auth/forms.py:17 app/auth/forms.py:39
-msgid "Password"
-msgstr "Пароль"
-
-#: app/auth/forms.py:11 app/templates/auth/login.html:7
-msgid "Sign In"
-msgstr "Вход"
-
-#: app/auth/forms.py:16 app/auth/forms.py:34
-msgid "Email"
-msgstr "Email"
-
-#: app/auth/forms.py:19 app/auth/forms.py:41
-msgid "Repeat Password"
-msgstr "Повторите пароль"
-
-#: app/auth/forms.py:20 app/templates/auth/register.html:7
-#: app/templates/base.html:75
-msgid "Register"
-msgstr "Регистрация"
-
-#: app/auth/forms.py:25
-msgid "This address is already in use."
-msgstr "Этот адрес уже используется"
-
-#: app/auth/forms.py:30
-msgid "This username is already in use."
-msgstr "Этот логин уже используется"
-
-#: app/auth/forms.py:35
-msgid "Request Password Reset"
-msgstr "Запросить изменение пароля"
-
-#: app/auth/forms.py:42
-msgid "Reset Password"
-msgstr "Изменить пароль"
-
-#: app/auth/routes.py:24
-msgid "Invalid user or password"
-msgstr "Неверный логин или пароль"
-
-#: app/auth/routes.py:63
-msgid ""
-"Congratulations, you are now a registered user! Check your email for "
-"verification."
-msgstr ""
-"Поздравляем с регистрацией! Проверьте свою почту для подтверждения "
-"аккаунта. Проверьте спам. Если вы используете Яндекс почту, для открытия "
-"ссылки из письма, надо подтвердить что письмо не спам."
-
-#: app/auth/routes.py:80
-msgid "Your account has already been confirmed."
-msgstr "Ваш аккаунт уже подтвержден"
-
-#: app/auth/routes.py:89
-msgid "A new confirmation email has been sent."
-msgstr "Новое письмо с подтверждением было отправлено"
-
-#: app/auth/routes.py:97
-msgid "Account already confirmed."
-msgstr "Аккаунт уже подтвержден"
-
-#: app/auth/routes.py:106
-msgid "You have confirmed your account. Thanks!"
-msgstr "Вы подтвердили свой аккаунт! Спасибо!"
-
-#: app/auth/routes.py:108
-msgid "The confirmation link is invalid or has expired."
-msgstr "Ссылка подверждения неверная или истекла"
-
-#: app/auth/routes.py:121
-msgid "Check your email for the instructions to reset your password"
-msgstr "Проверьте вашу почту, вам придет инструкция"
-
-#: app/auth/routes.py:138
-msgid "Your password has been reset."
-msgstr "Ваш пароль был изменен"
-
-#: app/auth/utils.py:81
-msgid "[QueueHere] Reset Your Password"
-msgstr "[QueueHere] Изменение пароля"
-
-#: app/queue/forms.py:8
-msgid "Name"
-msgstr "Название"
-
-#: app/queue/forms.py:9
-msgid "Create"
-msgstr "Создать"
-
-#: app/queue/forms.py:13
-msgid "Join with name"
-msgstr "Войти под именем"
-
-#: app/queue/forms.py:14
-msgid "Join"
-msgstr "Войти"
-
-#: app/queue/forms.py:18 app/queue/forms.py:23 app/queue/forms.py:28
-msgid "Queue ID"
-msgstr "ID Очереди"
-
-#: app/queue/forms.py:19 app/templates/base.html:49
-msgid "Find"
-msgstr "Найти"
-
-#: app/queue/forms.py:24
-msgid "Delete"
-msgstr "Удалить"
-
-#: app/queue/forms.py:29 app/templates/queue/my_queues.html:20
-msgid "Forget"
-msgstr "Забыть"
-
-#: app/queue/routes.py:22
-msgid "Queue is closed."
-msgstr "Очередь закрыта"
-
-#: app/queue/routes.py:25
-msgid "You have already enter this queue."
-msgstr "Вы уже вошли в эту очередь"
-
-#: app/queue/routes.py:47
-msgid "You cant create more %(max_queues) than  queues"
-msgstr "Вы не можете создать больше чем %(max_queues) очередей"
-
-#: app/templates/base.html:54
-msgid "New"
-msgstr "Создать"
-
-#: app/templates/base.html:59 app/templates/base.html:170
-msgid "Queues"
-msgstr "Очереди"
-
-#: app/templates/base.html:63
-msgid "Logout"
-msgstr "Выйти"
-
-#: app/templates/base.html:71
-msgid "Login"
-msgstr "Войти"
-
-#: app/templates/base.html:116
-msgid "I updated the site a little bit"
-msgstr "Я немного обновил сайт"
-
-#: app/templates/base.html:123
-msgid ""
-"Now you can log into the account normally and it will not log out for a "
-"long time, if you forget your password, you can reset it"
-msgstr ""
-"Теперь можно нормально войти в аккаунт и он не выйдет в течение "
-"длительного срока, а если забыли пароль, то вы сможете его восстановить"
-
-#: app/templates/base.html:127
-msgid ""
-"Which I advise you to do, because it will automatically fill in the name "
-"when you enter the queue, as well as always be at hand will be a "
-"convenient list of your queues"
-msgstr ""
-" Что я и советую сделать, так как это даст автоматическое заполнение "
-"имени при входе в очередь, а так же под рукой всегда будет удобный список"
-" ваших очередей "
-
-#: app/templates/base.html:131
-msgid ""
-"And now you can support me morally by logging into your account and "
-"clicking on the heart at the bottom of the site"
-msgstr ""
-"А еще теперь вы можете морально меня поддержать, войдя в аккаунт и "
-"кликнув на сердечко внизу сайта "
-
-#: app/templates/base.html:136
-msgid "Sure"
-msgstr "Понял"
-
-#: app/templates/base.html:150
-msgid "Stats"
-msgstr "Статистика"
-
-#: app/templates/base.html:169
-msgid "Users"
-msgstr "Пользователи"
-
-#: app/templates/base.html:171
-msgid "Queues entries"
-msgstr "Входов в очередь"
-
-#: app/templates/base.html:197
-msgid "Login and confirm you account"
-msgstr "Войдите и подтвердите аккаунт"
-
-#: app/templates/auth/inactive.html:8
-msgid ""
-"You have not confirmed your account. Please check your inbox (and your "
-"spam folder) - you should have received an email with a confirmation "
-"link."
-msgstr ""
-"Вы не подтвердили свою учетную запись. Пожалуйста, проверьте свой "
-"почтовый ящик (и папку спам) - вы должны были получить письмо со ссылкой "
-"для подтверждения. Если вы используете Яндекс почту, для открытия ссылки "
-"из письма, надо подтвердить что письмо не спам."
-
-#: app/templates/auth/inactive.html:12
-msgid "Didn't get the email?"
-msgstr "Не получили письмо?"
-
-#: app/templates/auth/inactive.html:14
-msgid "Resend"
-msgstr "Отправить еще раз"
-
-#: app/templates/auth/login.html:10
-msgid "New User?"
-msgstr "Новый пользователь?"
-
-#: app/templates/auth/login.html:11
-msgid "Click to Register!"
-msgstr "Нажмите для регистрации!"
-
-#: app/templates/auth/login.html:14
-msgid "Forget Password or Username?"
-msgstr "Забыли пароль или логин?"
-
-#: app/templates/auth/login.html:15 app/templates/auth/reset_password.html:7
-msgid "Reset password"
-msgstr "Изменить пароль"
-
-#: app/templates/auth/reset_password_request.html:7
-msgid "Request password reset"
-msgstr "Запросить изменение пароля"
-
-#: app/templates/auth/email/confirm_email.html:7
-msgid ""
-"Welcome! Thanks for signing up. Please follow this link to activate your "
-"account:"
-msgstr ""
-"Добро пожаловать! Спасибо за регистрацию. Перейдите по данной ссылки для "
-"активации аккаунта"
-
-#: app/templates/auth/email/reset_password.html:1
-msgid "Hello!"
-msgstr "Здравствуйте!"
-
-#: app/templates/auth/email/reset_password.html:2
-msgid "Your username is"
-msgstr "Ваш логин"
-
-#: app/templates/auth/email/reset_password.html:4
-msgid "To reset password"
-msgstr "Чтобы изменить пароль"
-
-#: app/templates/auth/email/reset_password.html:6
-msgid "click this link"
-msgstr "кликните по этой ссылке"
-
-#: app/templates/auth/email/reset_password.html:9
-msgid "Or paste it to browser address line"
-msgstr "Или вставьте ее в адресную строку браузера"
-
-#: app/templates/auth/email/reset_password.html:11
-msgid "Ignore this message, if you didnt ask for it"
-msgstr "Игнорируйте данное сообщение, если вы не запрашивали его"
+#: app/templates/base.html:10
+msgid "Site moved"
+msgstr "Сайт переехал"
 
 #: app/templates/errors/404.html:4
 msgid "Wrong address"
@@ -310,128 +39,18 @@ msgstr "Возникла непредвиденная ошибка"
 msgid "The administrator has been notified. Sorry for the inconvenience!"
 msgstr "Администратор был уведомлен, извините за проблемы!"
 
-#: app/templates/main/index.html:7
-msgid "Join Queue"
-msgstr "Присоединиться"
+#: app/templates/main/index.html:6
+msgid "Site Moved"
+msgstr "Сайт переехал"
 
-#: app/templates/main/index.html:16
-msgid "Register to get access to all the features:"
-msgstr "Зарегистрируйся чтобы получить доступ ко всем возможностям"
-
-#: app/templates/main/index.html:17
-msgid "Create queues"
-msgstr "Создавай очереди"
-
-#: app/templates/main/index.html:20
-msgid "Manage your queues"
-msgstr "Управляй очередями"
-
-#: app/templates/main/index.html:29
-msgid "Swap members"
-msgstr "Перемещай участников"
-
-#: app/templates/main/index.html:30
-msgid "Remove members"
-msgstr "Удаляй участников"
-
-#: app/templates/main/index.html:31
-msgid "Clear the queue"
-msgstr "Очищай очередь"
-
-#: app/templates/main/index.html:32
-msgid "Lock and unlock"
-msgstr "Закрывай и открывай"
-
-#: app/templates/main/index.html:38
-msgid "Add scheduled tasks"
-msgstr "Добавляй запланированные задачи"
-
-#: app/templates/main/index.html:46
-msgid "Choose time, date and action"
-msgstr "Выбери время, дату и действие"
-
-#: app/templates/main/index.html:53
-msgid "Remember queues"
-msgstr "Запоминай очереди"
-
-#: app/templates/queue/create_queue.html:7
-msgid "Create queue"
-msgstr "Создать очередь"
-
-#: app/templates/queue/manage_queue.html:71
-#: app/templates/queue/manage_queue.html:95
-msgid "Clear"
-msgstr "Очистить"
-
-#: app/templates/queue/manage_queue.html:72
-#: app/templates/queue/manage_queue.html:93
-msgid "Close"
-msgstr "Закрыть"
-
-#: app/templates/queue/manage_queue.html:73
-#: app/templates/queue/manage_queue.html:94
-msgid "Open"
-msgstr "Открыть"
-
-#: app/templates/queue/manage_queue.html:74
-msgid "Tasks"
-msgstr "Задачи"
-
-#: app/templates/queue/manage_queue.html:75
-msgid "Spam"
-msgstr "Спам"
-
-#: app/templates/queue/manage_queue.html:105
-msgid "Add task"
-msgstr "Добавить"
-
-#: app/templates/queue/my_queues.html:6
-msgid "Your queues"
-msgstr "Ваши очереди"
-
-#: app/templates/queue/my_queues.html:31
-msgid "Are you sure you want to forget?"
-msgstr "Вы уверены что хотите забыть?"
-
-#: app/templates/queue/my_queues.html:37
-msgid "This action cannot be undone"
-msgstr "Это действие не может быть отменено"
-
-#: app/templates/queue/my_queues.html:41 app/templates/queue/my_queues.html:91
-msgid "No"
-msgstr "Нет"
-
-#: app/templates/queue/my_queues.html:47 app/templates/queue/my_queues.html:96
-msgid "Yes"
-msgstr "Да"
-
-#: app/templates/queue/my_queues.html:57
-msgid "Owned queues"
-msgstr "Созданные очереди"
-
-#: app/templates/queue/my_queues.html:81
-msgid "Are you sure you want to delete?"
-msgstr "Вы уверены что хотите удалить?"
-
-#: app/templates/queue/my_queues.html:87
-msgid "This action cannot be undone."
-msgstr "Это действие не может быть отменено"
-
-#: app/templates/queue/queue.html:63
-msgid "Next clearing"
-msgstr "Следующая очистка"
-
-#: app/templates/queue/queue.html:69
-msgid "Next closing"
-msgstr "Следующее закрытие"
-
-#: app/templates/queue/queue.html:75
-msgid "Next opening"
-msgstr "Следующее открытие"
-
-#: app/templates/queue/queue.html:104
-msgid "Leave"
-msgstr "Выйти"
+#: app/templates/main/index.html:8
+msgid ""
+"The page you are looking for has moved to a new location. Please update "
+"your bookmarks or click the link\n"
+"                below to be redirected."
+msgstr ""
+"Сайт который вы ищете, переехал, обновите свои закладки и заходите на "
+"новую локацию!"
 
 #~ msgid "Updated"
 #~ msgstr "Сохранено"
@@ -465,4 +84,333 @@ msgstr "Выйти"
 
 #~ msgid "Remember Me"
 #~ msgstr "Запомнить меня"
+
+#~ msgid "Please login to access this page"
+#~ msgstr "Пожалуйста войдите в аккаунт, чтобы получить доступ к данной странице"
+
+#~ msgid "Please confirm your account!"
+#~ msgstr "Пожалуйста, подтвердите свой аккаунт!"
+
+#~ msgid "Username"
+#~ msgstr "Логин"
+
+#~ msgid "Password"
+#~ msgstr "Пароль"
+
+#~ msgid "Sign In"
+#~ msgstr "Вход"
+
+#~ msgid "Email"
+#~ msgstr "Email"
+
+#~ msgid "Repeat Password"
+#~ msgstr "Повторите пароль"
+
+#~ msgid "Register"
+#~ msgstr "Регистрация"
+
+#~ msgid "This address is already in use."
+#~ msgstr "Этот адрес уже используется"
+
+#~ msgid "This username is already in use."
+#~ msgstr "Этот логин уже используется"
+
+#~ msgid "Request Password Reset"
+#~ msgstr "Запросить изменение пароля"
+
+#~ msgid "Reset Password"
+#~ msgstr "Изменить пароль"
+
+#~ msgid "Invalid user or password"
+#~ msgstr "Неверный логин или пароль"
+
+#~ msgid ""
+#~ "Congratulations, you are now a "
+#~ "registered user! Check your email for"
+#~ " verification."
+#~ msgstr ""
+#~ "Поздравляем с регистрацией! Проверьте свою "
+#~ "почту для подтверждения аккаунта. Проверьте"
+#~ " спам. Если вы используете Яндекс "
+#~ "почту, для открытия ссылки из письма,"
+#~ " надо подтвердить что письмо не спам."
+
+#~ msgid "Your account has already been confirmed."
+#~ msgstr "Ваш аккаунт уже подтвержден"
+
+#~ msgid "A new confirmation email has been sent."
+#~ msgstr "Новое письмо с подтверждением было отправлено"
+
+#~ msgid "Account already confirmed."
+#~ msgstr "Аккаунт уже подтвержден"
+
+#~ msgid "You have confirmed your account. Thanks!"
+#~ msgstr "Вы подтвердили свой аккаунт! Спасибо!"
+
+#~ msgid "The confirmation link is invalid or has expired."
+#~ msgstr "Ссылка подверждения неверная или истекла"
+
+#~ msgid "Check your email for the instructions to reset your password"
+#~ msgstr "Проверьте вашу почту, вам придет инструкция"
+
+#~ msgid "Your password has been reset."
+#~ msgstr "Ваш пароль был изменен"
+
+#~ msgid "[QueueHere] Reset Your Password"
+#~ msgstr "[QueueHere] Изменение пароля"
+
+#~ msgid "Name"
+#~ msgstr "Название"
+
+#~ msgid "Create"
+#~ msgstr "Создать"
+
+#~ msgid "Join with name"
+#~ msgstr "Войти под именем"
+
+#~ msgid "Join"
+#~ msgstr "Войти"
+
+#~ msgid "Queue ID"
+#~ msgstr "ID Очереди"
+
+#~ msgid "Find"
+#~ msgstr "Найти"
+
+#~ msgid "Delete"
+#~ msgstr "Удалить"
+
+#~ msgid "Forget"
+#~ msgstr "Забыть"
+
+#~ msgid "Queue is closed."
+#~ msgstr "Очередь закрыта"
+
+#~ msgid "You have already enter this queue."
+#~ msgstr "Вы уже вошли в эту очередь"
+
+#~ msgid "You cant create more %(max_queues) than  queues"
+#~ msgstr "Вы не можете создать больше чем %(max_queues) очередей"
+
+#~ msgid "New"
+#~ msgstr "Создать"
+
+#~ msgid "Queues"
+#~ msgstr "Очереди"
+
+#~ msgid "Logout"
+#~ msgstr "Выйти"
+
+#~ msgid "Login"
+#~ msgstr "Войти"
+
+#~ msgid "Stats"
+#~ msgstr "Статистика"
+
+#~ msgid "Users"
+#~ msgstr "Пользователи"
+
+#~ msgid "Queues entries"
+#~ msgstr "Входов в очередь"
+
+#~ msgid "Login and confirm you account"
+#~ msgstr "Войдите и подтвердите аккаунт"
+
+#~ msgid ""
+#~ "You have not confirmed your account. "
+#~ "Please check your inbox (and your "
+#~ "spam folder) - you should have "
+#~ "received an email with a confirmation"
+#~ " link."
+#~ msgstr ""
+#~ "Вы не подтвердили свою учетную запись."
+#~ " Пожалуйста, проверьте свой почтовый ящик"
+#~ " (и папку спам) - вы должны "
+#~ "были получить письмо со ссылкой для "
+#~ "подтверждения. Если вы используете Яндекс "
+#~ "почту, для открытия ссылки из письма,"
+#~ " надо подтвердить что письмо не спам."
+
+#~ msgid "Didn't get the email?"
+#~ msgstr "Не получили письмо?"
+
+#~ msgid "Resend"
+#~ msgstr "Отправить еще раз"
+
+#~ msgid "New User?"
+#~ msgstr "Новый пользователь?"
+
+#~ msgid "Click to Register!"
+#~ msgstr "Нажмите для регистрации!"
+
+#~ msgid "Forget Password or Username?"
+#~ msgstr "Забыли пароль или логин?"
+
+#~ msgid "Reset password"
+#~ msgstr "Изменить пароль"
+
+#~ msgid "Request password reset"
+#~ msgstr "Запросить изменение пароля"
+
+#~ msgid ""
+#~ "Welcome! Thanks for signing up. Please"
+#~ " follow this link to activate your"
+#~ " account:"
+#~ msgstr ""
+#~ "Добро пожаловать! Спасибо за регистрацию. "
+#~ "Перейдите по данной ссылки для активации"
+#~ " аккаунта"
+
+#~ msgid "Hello!"
+#~ msgstr "Здравствуйте!"
+
+#~ msgid "Your username is"
+#~ msgstr "Ваш логин"
+
+#~ msgid "To reset password"
+#~ msgstr "Чтобы изменить пароль"
+
+#~ msgid "click this link"
+#~ msgstr "кликните по этой ссылке"
+
+#~ msgid "Or paste it to browser address line"
+#~ msgstr "Или вставьте ее в адресную строку браузера"
+
+#~ msgid "Ignore this message, if you didnt ask for it"
+#~ msgstr "Игнорируйте данное сообщение, если вы не запрашивали его"
+
+#~ msgid "Join Queue"
+#~ msgstr "Присоединиться"
+
+#~ msgid "Register to get access to all the features:"
+#~ msgstr "Зарегистрируйся чтобы получить доступ ко всем возможностям"
+
+#~ msgid "Create queues"
+#~ msgstr "Создавай очереди"
+
+#~ msgid "Manage your queues"
+#~ msgstr "Управляй очередями"
+
+#~ msgid "Swap members"
+#~ msgstr "Перемещай участников"
+
+#~ msgid "Remove members"
+#~ msgstr "Удаляй участников"
+
+#~ msgid "Clear the queue"
+#~ msgstr "Очищай очередь"
+
+#~ msgid "Lock and unlock"
+#~ msgstr "Закрывай и открывай"
+
+#~ msgid "Add scheduled tasks"
+#~ msgstr "Добавляй запланированные задачи"
+
+#~ msgid "Choose time, date and action"
+#~ msgstr "Выбери время, дату и действие"
+
+#~ msgid "Remember queues"
+#~ msgstr "Запоминай очереди"
+
+#~ msgid "Create queue"
+#~ msgstr "Создать очередь"
+
+#~ msgid "Clear"
+#~ msgstr "Очистить"
+
+#~ msgid "Close"
+#~ msgstr "Закрыть"
+
+#~ msgid "Open"
+#~ msgstr "Открыть"
+
+#~ msgid "Tasks"
+#~ msgstr "Задачи"
+
+#~ msgid "Spam"
+#~ msgstr "Спам"
+
+#~ msgid "Add task"
+#~ msgstr "Добавить"
+
+#~ msgid "Your queues"
+#~ msgstr "Ваши очереди"
+
+#~ msgid "Are you sure you want to forget?"
+#~ msgstr "Вы уверены что хотите забыть?"
+
+#~ msgid "This action cannot be undone"
+#~ msgstr "Это действие не может быть отменено"
+
+#~ msgid "No"
+#~ msgstr "Нет"
+
+#~ msgid "Yes"
+#~ msgstr "Да"
+
+#~ msgid "Owned queues"
+#~ msgstr "Созданные очереди"
+
+#~ msgid "Are you sure you want to delete?"
+#~ msgstr "Вы уверены что хотите удалить?"
+
+#~ msgid "This action cannot be undone."
+#~ msgstr "Это действие не может быть отменено"
+
+#~ msgid "Next clearing"
+#~ msgstr "Следующая очистка"
+
+#~ msgid "Next closing"
+#~ msgstr "Следующее закрытие"
+
+#~ msgid "Next opening"
+#~ msgstr "Следующее открытие"
+
+#~ msgid "Leave"
+#~ msgstr "Выйти"
+
+#~ msgid "I updated the site a little bit"
+#~ msgstr "Я немного обновил сайт"
+
+#~ msgid ""
+#~ "Now you can log into the account"
+#~ " normally and it will not log "
+#~ "out for a long time, if you "
+#~ "forget your password, you can reset "
+#~ "it"
+#~ msgstr ""
+#~ "Теперь можно нормально войти в аккаунт"
+#~ " и он не выйдет в течение "
+#~ "длительного срока, а если забыли пароль,"
+#~ " то вы сможете его восстановить"
+
+#~ msgid ""
+#~ "Which I advise you to do, because"
+#~ " it will automatically fill in the"
+#~ " name when you enter the queue, "
+#~ "as well as always be at hand "
+#~ "will be a convenient list of your"
+#~ " queues"
+#~ msgstr ""
+#~ " Что я и советую сделать, так "
+#~ "как это даст автоматическое заполнение "
+#~ "имени при входе в очередь, а так"
+#~ " же под рукой всегда будет удобный"
+#~ " список ваших очередей "
+
+#~ msgid ""
+#~ "And now you can support me morally"
+#~ " by logging into your account and "
+#~ "clicking on the heart at the "
+#~ "bottom of the site"
+#~ msgstr ""
+#~ "А еще теперь вы можете морально "
+#~ "меня поддержать, войдя в аккаунт и "
+#~ "кликнув на сердечко внизу сайта "
+
+#~ msgid "Sure"
+#~ msgstr "Понял"
+
+#~ msgid "Click here to go to the new location"
+#~ msgstr "Кликните чтобы переместится на новую локацию"
 

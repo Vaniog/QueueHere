@@ -8,7 +8,6 @@ from flask_babel import Babel
 from flask_qrcode import QRcode
 from flask_wtf import CSRFProtect
 
-login = LoginManager()
 db = SQLAlchemy()
 migrate = Migrate()
 bootstrap = Bootstrap5()

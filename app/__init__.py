@@ -1,13 +1,11 @@
 from flask import Flask
 from app.config import Config
-from app.extensions import db, login, migrate, bootstrap, mail, moment, babel, qrcode, csrf
+from app.extensions import db, migrate, bootstrap, mail, moment, babel, qrcode, csrf
 from app.utils import get_locale
-from app.main.models import Stats, StatsEnum
 import logging
 from logging.handlers import RotatingFileHandler
 import os
 
-from bots.taskbot.taskbot import TaskBotThread
 from flask_babel import lazy_gettext as _l
 
 
@@ -15,7 +13,6 @@ def create_app(config_obj=Config()):
     app = Flask(__name__)
     app.config.from_object(config_obj)
     db.init_app(app)
-    login.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
     bootstrap.init_app(app)
     mail.init_app(app)
@@ -32,22 +29,6 @@ def create_app(config_obj=Config()):
     from app.errors import bp as err_bp
     app.register_blueprint(err_bp)
 
-    from app.auth import bp as auth_bp
-    app.register_blueprint(auth_bp)
-
-    from app.queue import bp as queue_bp
-    app.register_blueprint(queue_bp)
-
-    login.login_view = 'auth.login'
-    login.login_message = _l('Please login to access this page')
-    login.session_protection = "strong"
-
-    from app.auth.models import User
-
-    @login.user_loader
-    def load_user(user_id):
-        return User.query.get(int(user_id))
-
     if not app.debug:
         if not os.path.exists('logs'):
             os.mkdir('logs')
@@ -61,14 +42,6 @@ def create_app(config_obj=Config()):
 
         app.logger.setLevel(logging.INFO)
         app.logger.info('Microblog startup')
-
-    bot_thread = TaskBotThread(app)
-    bot_thread.start()
-
-    @app.context_processor
-    def inject_stage_and_region():
-        return dict(Stats=Stats,
-                    StatsEnum=StatsEnum)
 
     return app
 
