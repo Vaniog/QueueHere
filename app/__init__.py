@@ -42,7 +42,11 @@ def create_app(config_obj=Config()):
     login.login_message = _l('Please login to access this page')
     login.session_protection = "strong"
 
-    app.app_context().push()
+    from app.auth.models import User
+
+    @login.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
 
     if not app.debug:
         if not os.path.exists('logs'):
