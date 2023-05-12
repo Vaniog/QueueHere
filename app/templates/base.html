@@ -74,10 +74,23 @@
                         <a href="{{ url_for('auth.register') }}"
                            class="nav-link text-bg-primary">{{ _('Register') }}</a>
                     </li>
-                    <button class="btn text-bg-primary d-flex justify-content-start ms-auto" id="theme-btn">
+                    <button class="btn text-bg-primary d-flex justify-content-start ms-sm-auto" id="theme-btn">
                         <i class="bi bi-sun-fill h5 m-0 p-0"></i>
                     </button>
                 {% endif %}
+
+                <button type="button"
+                        class="btn text-bg-primary bg-opacity-10 alert-fixed d-flex justify-content-start pe-0"
+                        data-bs-toggle="modal"
+                        data-bs-target="#info-modal">
+                    <span>
+                    <i class="bi bi-info-square-fill"></i>
+                    <span id="info-notification" class="translate-middle ms-2 badge rounded-pill bg-danger"
+                          style="display:none">
+                        1.0
+                    </span>
+                    </span>
+                </button>
             </ul>
         </div>
     </div>
@@ -107,13 +120,13 @@
 
 </div>
 
-<div id="version-popup" class="modal fade" tabindex="-1">
-    <div class="modal-dialog">
+<div id="info-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
                     <i class="bi bi-arrow-repeat"></i>
-                    {{ _('I updated the site a little bit') }}
+                    {{ _('I updated the site a little bit') }} (v1.0)
                 </h5>
             </div>
             <div class="modal-body">
