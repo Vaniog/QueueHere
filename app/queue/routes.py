@@ -216,11 +216,10 @@ def add_task():
                      action=TaskEnum[task_action])
     try:
         task.execute_time = task_time
+        db.session.add(task)
+        db.session.commit()
     except:
         abort(400)
-
-    db.session.add(task)
-    db.session.commit()
 
     return {}, 200
 
