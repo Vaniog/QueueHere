@@ -104,6 +104,7 @@ class Queue(db.Model):
                        index_in_queue=self.last_index,
                        arrive_time=datetime.utcnow())
         uq.member = user
+        Stats.increase(StatsEnum.queues_entries)
         self.members.append(uq)
 
     def clear(self):
