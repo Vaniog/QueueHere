@@ -4,9 +4,7 @@ Website for creating, managing and sharing queues.
 
 Includes english and russian languages.
 
-https://queue.hopto.org \
-or \
-http://queuehere.ru (just redirect, but i hope soon it will be a main domain name)
+http://queue-here.ru
 
 - [Demonstration](#demonstration)
 - [Details](#details)
