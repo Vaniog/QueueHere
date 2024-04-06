@@ -5,9 +5,8 @@ services:
   database:
     image: mariadb:latest
     restart: always
-    environment:
-      MARIADB_ROOT_PASSWORD: 'root'
-      MARIADB_DATABASE: 'db'
+    env_file:
+      - app/.env
     ports:
       - '3306:3306'
     expose:
@@ -18,7 +17,7 @@ services:
     image: phpmyadmin
     restart: always
     ports:
-      - "80:80"
+      - "1000:80"
     environment:
       - PMA_ARBITRARY=1
   backend:
