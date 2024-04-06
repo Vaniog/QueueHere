@@ -1,0 +1,40 @@
+version: '3.3'
+volumes:
+  data:
+services:
+  database:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: 'root'
+      MARIADB_DATABASE: 'db'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      - PMA_ARBITRARY=1
+  backend:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./docker/backend/Dockerfile
+    command:
+      - ./docker/backend/run.sh
+    container_name: backend
+    env_file:
+      - app/.env
+    volumes:
+      - ./media:/backend/media:consistent
+      - ./static:/backend/static:consistent
+    depends_on:
+      - database
+    ports:
+    - "8000:8000"

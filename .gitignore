@@ -9,3 +9,4 @@ app/.env
 scripts/
 sessions
 .htaccess
+data
