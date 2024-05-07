@@ -7,10 +7,6 @@ services:
     restart: always
     env_file:
       - app/.env
-    ports:
-      - '3306:3306'
-    expose:
-      - '3306'
     volumes:
       - ./data:/var/lib/mysql
   adminer:
