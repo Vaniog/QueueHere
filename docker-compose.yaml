@@ -13,13 +13,14 @@ services:
       - '3306'
     volumes:
       - ./data:/var/lib/mysql
-  phpmyadmin:
-    image: phpmyadmin
+  adminer:
+    image: adminer
+    container_name: adminer
     restart: always
-    ports:
-      - "1000:80"
-    environment:
-      - PMA_ARBITRARY=1
+    ports: 
+      - "1000:8000"
+    depends_on:
+      - database
   backend:
     restart: unless-stopped
     build:
